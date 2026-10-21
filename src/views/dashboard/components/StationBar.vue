@@ -27,7 +27,7 @@ const props = defineProps({
   },
   xName: {
     type: String,
-    default: '日'
+    default: '일'
   },
   barColor: {
     type: Array,
@@ -38,7 +38,7 @@ const props = defineProps({
   setting: {
     type: Object,
     default: () => {
-      return {seriesName: '充电订单数量', yName: ''}
+      return {seriesName: '충전 주문 수', yName: ''}
     }
   },
   chartData: {
@@ -76,7 +76,7 @@ function initChart() {
     tooltip: {
       trigger: 'axis',
       axisPointer: { // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        type: 'shadow' // 기본: 直线，可选: ：'line' | 'shadow'
       },
       // backgroundColor: 'rgba(28, 37, 80, 0.9)',
       // borderColor: '#2969e8',

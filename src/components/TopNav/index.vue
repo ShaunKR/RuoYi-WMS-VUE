@@ -16,7 +16,7 @@
 
     <!-- 顶部菜单超出数量折叠 -->
     <el-sub-menu :style="{'--theme': theme}" index="more" v-if="topMenus.length > visibleNumber">
-      <template #title>更多菜单</template>
+      <template #title>더 많은 메뉴</template>
       <template v-for="(item, index) in topMenus">
         <el-menu-item
           :index="item.path"
@@ -194,12 +194,12 @@ onMounted(() => {
   margin: 0 10px !important;
 }
 
-/* 背景色隐藏 */
+/* 背景色숨기기 */
 .topmenu-container.el-menu--horizontal>.el-menu-item:not(.is-disabled):focus, .topmenu-container.el-menu--horizontal>.el-menu-item:not(.is-disabled):hover, .topmenu-container.el-menu--horizontal>.el-submenu .el-submenu__title:hover {
   background-color: #ffffff !important;
 }
 
-/* 图标右间距 */
+/* 아이콘右间距 */
 .topmenu-container .svg-icon {
   margin-right: 4px;
 }

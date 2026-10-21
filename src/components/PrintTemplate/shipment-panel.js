@@ -12,16 +12,16 @@ export default {
         "top": 35,
         "height": 40,
         "width": 160,
-        "title": "条形码",
+        "title": "바코드",
         "barcodeType": "code128",
         "testData": "barcode",
         "textType": "barcode",
         "fields": [{
-          "text": "出库单号",
+          "text": "출고 전표 번호",
           "field": "orderNo"
         },
           {
-            "text": "业务订单号",
+            "text": "업무 주문 번호",
             "field": "bizOrderNo"
           }
         ],
@@ -30,7 +30,7 @@ export default {
         "widthHeightSync": false
       },
       "printElementType": {
-        "title": "条形码",
+        "title": "바코드",
         "type": "barcode"
       }
     },
@@ -41,39 +41,39 @@ export default {
           "height": 27,
           "width": 350,
           "fields": [{
-            "text": "出库单号",
+            "text": "출고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             },
             {
-              "text": "仓库",
+              "text": "창고",
               "field": "warehouse"
             }
           ],
-          "title": "出库单",
+          "title": "출고 전표",
           "field": "orderNo",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -83,7 +83,7 @@ export default {
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -94,35 +94,35 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "出库类型",
+          "title": "출고 유형",
           "field": "optType",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -133,7 +133,7 @@ export default {
           "hCenter": 103.125
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -144,42 +144,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "出库状态",
+          "title": "출고 상태",
           "field": "orderStatus",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -190,42 +190,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "客户",
+          "title": "고객",
           "field": "merchantName",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -236,35 +236,35 @@ export default {
           "height": 9.75,
           "width": 150,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "业务订单号",
+          "title": "업무 주문 번호",
           "field": "bizOrderNo",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -275,7 +275,7 @@ export default {
           "hCenter": 126.375
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -286,42 +286,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "仓库",
+          "title": "창고",
           "field": "warehouseName",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -332,42 +332,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "数量",
+          "title": "수량",
           "field": "totalQuantity",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -378,35 +378,35 @@ export default {
           "height": 9.75,
           "width": 150,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "总金额",
+          "title": "총금액",
           "field": "totalAmount",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -417,7 +417,7 @@ export default {
           "hCenter": 126.375
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -428,42 +428,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "创建人",
+          "title": "등록자",
           "field": "createBy",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -474,35 +474,35 @@ export default {
           "height": 9.75,
           "width": 150,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "创建时间",
+          "title": "등록 일시",
           "field": "createTime",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -513,7 +513,7 @@ export default {
           "hCenter": 126.375
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -524,42 +524,42 @@ export default {
           "height": 9.75,
           "width": 200,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "操作人",
+          "title": "처리자",
           "field": "updateBy",
           "coordinateSync": false,
           "widthHeightSync": false,
           "qrCodeLevel": 0
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -570,35 +570,35 @@ export default {
           "height": 9.75,
           "width": 150,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "操作时间",
+          "title": "처리 일시",
           "field": "updateTime",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -609,7 +609,7 @@ export default {
           "hCenter": 126.375
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       },
@@ -624,7 +624,7 @@ export default {
           "columns": [
             [{
               "width": 78.57142857142857,
-              "title": "商品名称",
+              "title": "상품명",
               "field": "itemName",
               "checked": true,
               "columnId": "itemName",
@@ -634,7 +634,7 @@ export default {
             },
               {
                 "width": 78.57142857142857,
-                "title": "规格名称",
+                "title": "규격명",
                 "field": "skuName",
                 "checked": true,
                 "columnId": "skuName",
@@ -645,7 +645,7 @@ export default {
               {
                 "width": 78.57142857142857,
                 "align": "right",
-                "title": "数量",
+                "title": "수량",
                 "field": "quantity",
                 "checked": true,
                 "columnId": "quantity",
@@ -659,7 +659,7 @@ export default {
               {
                 "width": 78.57142857142857,
                 "align": "right",
-                "title": "金额(元)",
+                "title": "금액(위안)",
                 "field": "amount",
                 "checked": true,
                 "columnId": "amount",
@@ -673,7 +673,7 @@ export default {
           ]
         },
         "printElementType": {
-          "title": "表格",
+          "title": "표",
           "type": "table",
           "editable": true,
           "columnDisplayEditable": true,
@@ -697,35 +697,35 @@ export default {
           "height": 9.75,
           "width": 500,
           "fields": [{
-            "text": "入库单号",
+            "text": "입고 전표 번호",
             "field": "orderNo"
           },
             {
-              "text": "客户",
+              "text": "고객",
               "field": "merchantName"
             },
             {
-              "text": "业务订单号",
+              "text": "업무 주문 번호",
               "field": "bizOrderNo"
             },
             {
-              "text": "出库类型",
+              "text": "출고 유형",
               "field": "optType"
             },
             {
-              "text": "出库状态",
+              "text": "출고 상태",
               "field": "orderStatus"
             },
             {
-              "text": "创建日期",
+              "text": "등록일",
               "field": "createTime"
             },
             {
-              "text": "备注",
+              "text": "비고",
               "field": "remark"
             }
           ],
-          "title": "备注",
+          "title": "비고",
           "field": "remark",
           "coordinateSync": false,
           "widthHeightSync": false,
@@ -736,7 +736,7 @@ export default {
           "hCenter": 228.375
         },
         "printElementType": {
-          "title": "文本",
+          "title": "텍스트",
           "type": "text"
         }
       }

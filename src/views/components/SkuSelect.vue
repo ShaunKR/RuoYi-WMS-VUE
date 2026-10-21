@@ -1,82 +1,82 @@
 <template>
-  <el-drawer :model-value="show" title="商品选择" @close="handleCancelClick" :size="size" :close-on-click-modal="false" append-to-body>
+  <el-drawer :model-value="show" title="상품 선택" @close="handleCancelClick" :size="size" :close-on-click-modal="false" append-to-body>
         <el-form :inline="true" label-width="68px">
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="商品名称">
-                <el-input v-model="query.itemName" clearable placeholder="商品名称"></el-input>
+              <el-form-item label="상품명">
+                <el-input v-model="query.itemName" clearable placeholder="상품명"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="商品编号">
-                <el-input class="w200" v-model="query.itemCode" clearable placeholder="商品编号"></el-input>
+              <el-form-item label="상품 코드">
+                <el-input class="w200" v-model="query.itemCode" clearable placeholder="상품 코드"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="规格名称">
-                <el-input class="w200" v-model="query.skuName" clearable placeholder="规格名称"></el-input>
+              <el-form-item label="규격명">
+                <el-input class="w200" v-model="query.skuName" clearable placeholder="규격명"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="规格编号">
-                <el-input class="w200" v-model="query.barcode" clearable placeholder="规格编号"></el-input>
+              <el-form-item label="규격 코드">
+                <el-input class="w200" v-model="query.barcode" clearable placeholder="규격 코드"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-button type="primary" @click="loadAll">查询</el-button>
+              <el-button type="primary" @click="loadAll">조회</el-button>
             </el-col>
           </el-row>
         </el-form>
-            <el-table :data="list" @selection-change="handleSelectionChange" border :row-key="getRowKey" empty-text="暂无商品" v-loading="loading" ref="skuSelectFormRef" cell-class-name="my-cell">
+            <el-table :data="list" @selection-change="handleSelectionChange" border :row-key="getRowKey" empty-text="등록된 상품이 없습니다." v-loading="loading" ref="skuSelectFormRef" cell-class-name="my-cell">
               <el-table-column type="selection" width="55" :reserve-selection="true" v-if="!singleSelect" :selectable="judgeSelectable"/>
-              <el-table-column label="商品信息" prop="itemId">
+              <el-table-column label="상품 정보" prop="itemId">
                 <template #default="{ row }">
                   <div>{{ row.item.itemName }}</div>
-                  <div v-if="row.item.itemCode">编号：{{ row.item.itemCode }}</div>
-                  <div v-if="row.item.itemBrand">品牌：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}</div>
+                  <div v-if="row.item.itemCode">코드：{{ row.item.itemCode }}</div>
+                  <div v-if="row.item.itemBrand">브랜드：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}</div>
                 </template>
               </el-table-column>
-              <el-table-column label="规格信息">
+              <el-table-column label="규격 정보">
                 <template #default="{ row }">
                   <div>{{ row.itemSku.skuName }}</div>
-                  <div v-if="row.itemSku.skuCode">编号：{{ row.itemSku.skuCode }}</div>
-                  <div v-if="row.itemSku.barcode">条码：{{ row.itemSku.barcode }}</div>
+                  <div v-if="row.itemSku.skuCode">코드：{{ row.itemSku.skuCode }}</div>
+                  <div v-if="row.itemSku.barcode">바코드：{{ row.itemSku.barcode }}</div>
                 </template>
               </el-table-column>
-              <el-table-column label="价格(元)" width="160" align="left">
+              <el-table-column label="가격(위안)" width="160" align="left">
                 <template #default="{ row }">
                   <div v-if="row.itemSku.costPrice" class="flex-space-between">
-                    <span>成本价：</span>
+                    <span>원가：</span>
                     <div>{{ (row.itemSku.costPrice || row.itemSku.costPrice === 0) ? row.itemSku.costPrice : '' }}</div>
                   </div>
                   <div v-if="row.itemSku.sellingPrice" class="flex-space-between">
-                    <span>销售价：</span>
+                    <span>판매가：</span>
                     <div>{{ (row.itemSku.sellingPrice || row.itemSku.sellingPrice === 0) ? row.itemSku.sellingPrice : '' }}</div>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="重量(kg)" width="160" align="left">
+              <el-table-column label="중량(kg)" width="160" align="left">
                 <template #default="{ row }">
                   <div v-if="row.itemSku.netWeight" class="flex-space-between">
-                    <span>净重：</span>
+                    <span>순중량：</span>
                     <div>{{ (row.itemSku.netWeight || row.itemSku.netWeight === 0) ? row.itemSku.netWeight : '' }}</div>
                   </div>
                   <div v-if="row.itemSku.grossWeight" class="flex-space-between">
-                    <span>毛重：</span>
+                    <span>총중량：</span>
                     <div>{{ (row.itemSku.grossWeight || row.itemSku.grossWeight === 0) ? row.itemSku.grossWeight : '' }}</div>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="长宽高(cm)" align="right" width="250">
+              <el-table-column label="길이·너비·높이(cm)" align="right" width="250">
                 <template #default="{ row }">
                   <div>{{ getVolumeText(row) }}</div>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="100" v-if="singleSelect" align="right">
+              <el-table-column label="작업" width="100" v-if="singleSelect" align="right">
                 <template #default="{ row }">
-                  <el-button link type="primary" @click="handleChooseSku(row)">选择</el-button>
+                  <el-button link type="primary" @click="handleChooseSku(row)">선택</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -87,12 +87,12 @@
     <template v-slot:footer>
       <div style="width: 100%;display: flex;justify-content: space-between">
         <span>
-          <el-button @click="goCreateItem" icon="Plus">创建商品</el-button>
-          <el-button @click="loadAll" icon="Refresh">刷新</el-button>
+          <el-button @click="goCreateItem" icon="Plus">상품 등록</el-button>
+          <el-button @click="loadAll" icon="Refresh">새로고침</el-button>
         </span>
         <span>
-          <el-button @click="handleCancelClick">取消</el-button>
-          <el-button type="primary" @click="handleOkClick" v-if="!singleSelect">确认</el-button>
+          <el-button @click="handleCancelClick">취소</el-button>
+          <el-button type="primary" @click="handleOkClick" v-if="!singleSelect">확인</el-button>
       </span>
       </div>
     </template>
@@ -229,9 +229,9 @@ const getVolumeText = (row) => {
   if((row.length || row.length === 0) && (row.width || row.width === 0) && (row.height || row.height === 0)) {
     return row.length + ' * ' + row.width + ' * ' + row.height
   }
-  return ((row.length || row.length === 0) ? ('长：' + row.length) : '')
-    + ((row.width || row.width === 0) ? (' 宽：' + row.width) : '')
-    + ((row.height || row.height === 0) ? (' 高：' + row.height) : '')
+  return ((row.length || row.length === 0) ? ('길이：' + row.length) : '')
+    + ((row.width || row.width === 0) ? (' 너비：' + row.width) : '')
+    + ((row.height || row.height === 0) ? (' 높이：' + row.height) : '')
 }
 defineExpose({
   getList

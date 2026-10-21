@@ -1,26 +1,26 @@
 <template>
    <div class="app-container">
       <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-         <el-form-item label="参数名称" prop="configName">
+         <el-form-item label="설정명" prop="configName">
             <el-input
                v-model="queryParams.configName"
-               placeholder="请输入参数名称"
+               placeholder="입력해 주세요:설정명"
                clearable
                style="width: 240px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="参数键名" prop="configKey">
+         <el-form-item label="설정 키" prop="configKey">
             <el-input
                v-model="queryParams.configKey"
-               placeholder="请输入参数键名"
+               placeholder="입력해 주세요:설정 키"
                clearable
                style="width: 240px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="系统内置" prop="configType">
-            <el-select v-model="queryParams.configType" placeholder="系统内置" clearable>
+         <el-form-item label="시스템 기본" prop="configType">
+            <el-select v-model="queryParams.configType" placeholder="시스템 기본" clearable>
                <el-option
                   v-for="dict in sys_yes_no"
                   :key="dict.value"
@@ -29,20 +29,20 @@
                />
             </el-select>
          </el-form-item>
-         <el-form-item label="创建时间" style="width: 308px;">
+         <el-form-item label="등록 일시" style="width: 308px;">
             <el-date-picker
                v-model="dateRange"
                value-format="YYYY-MM-DD HH:mm:ss"
                type="daterange"
                range-separator="-"
-               start-placeholder="开始日期"
-               end-placeholder="结束日期"
+               start-placeholder="시작일"
+               end-placeholder="종료일"
                :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
             ></el-date-picker>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+            <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
          </el-form-item>
       </el-form>
 
@@ -54,7 +54,7 @@
                icon="Plus"
                @click="handleAdd"
                v-hasPermi="['system:config:add']"
-            >新增</el-button>
+            >추가</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -64,7 +64,7 @@
                :disabled="single"
                @click="handleUpdate"
                v-hasPermi="['system:config:edit']"
-            >修改</el-button>
+            >수정</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -74,7 +74,7 @@
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['system:config:remove']"
-            >删除</el-button>
+            >삭제</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -83,7 +83,7 @@
                icon="Download"
                @click="handleExport"
                v-hasPermi="['system:config:export']"
-            >导出</el-button>
+            >내보내기</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -92,32 +92,32 @@
                icon="Refresh"
                @click="handleRefreshCache"
                v-hasPermi="['system:config:remove']"
-            >刷新缓存</el-button>
+            >캐시 갱신</el-button>
          </el-col>
          <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
 
       <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column label="参数主键" align="center" prop="configId" />
-         <el-table-column label="参数名称" align="center" prop="configName" :show-overflow-tooltip="true" />
-         <el-table-column label="参数键名" align="center" prop="configKey" :show-overflow-tooltip="true" />
-         <el-table-column label="参数键值" align="center" prop="configValue" :show-overflow-tooltip="true" />
-         <el-table-column label="系统内置" align="center" prop="configType">
+         <el-table-column label="설정 ID" align="center" prop="configId" />
+         <el-table-column label="설정명" align="center" prop="configName" :show-overflow-tooltip="true" />
+         <el-table-column label="설정 키" align="center" prop="configKey" :show-overflow-tooltip="true" />
+         <el-table-column label="설정 값" align="center" prop="configValue" :show-overflow-tooltip="true" />
+         <el-table-column label="시스템 기본" align="center" prop="configType">
             <template #default="scope">
                <dict-tag :options="sys_yes_no" :value="scope.row.configType" />
             </template>
          </el-table-column>
-         <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true" />
-         <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+         <el-table-column label="비고" align="center" prop="remark" :show-overflow-tooltip="true" />
+         <el-table-column label="등록 일시" align="center" prop="createTime" width="180">
             <template #default="scope">
                <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
          </el-table-column>
-         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+         <el-table-column label="작업" align="center" width="150" class-name="small-padding fixed-width">
             <template #default="scope">
-               <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']" >修改</el-button>
-               <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">删除</el-button>
+               <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']" >수정</el-button>
+               <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">삭제</el-button>
             </template>
          </el-table-column>
       </el-table>
@@ -133,16 +133,16 @@
       <!-- 添加或修改参数配置对话框 -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
          <el-form ref="configRef" :model="form" :rules="rules" label-width="80px">
-            <el-form-item label="参数名称" prop="configName">
-               <el-input v-model="form.configName" placeholder="请输入参数名称" />
+            <el-form-item label="설정명" prop="configName">
+               <el-input v-model="form.configName" placeholder="입력해 주세요:설정명" />
             </el-form-item>
-            <el-form-item label="参数键名" prop="configKey">
-               <el-input v-model="form.configKey" placeholder="请输入参数键名" />
+            <el-form-item label="설정 키" prop="configKey">
+               <el-input v-model="form.configKey" placeholder="입력해 주세요:설정 키" />
             </el-form-item>
-            <el-form-item label="参数键值" prop="configValue">
-               <el-input v-model="form.configValue" placeholder="请输入参数键值" />
+            <el-form-item label="설정 값" prop="configValue">
+               <el-input v-model="form.configValue" placeholder="입력해 주세요:설정 값" />
             </el-form-item>
-            <el-form-item label="系统内置" prop="configType">
+            <el-form-item label="시스템 기본" prop="configType">
                <el-radio-group v-model="form.configType">
                   <el-radio
                      v-for="dict in sys_yes_no"
@@ -151,14 +151,14 @@
                   >{{ dict.label }}</el-radio>
                </el-radio-group>
             </el-form-item>
-            <el-form-item label="备注" prop="remark">
-               <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+            <el-form-item label="비고" prop="remark">
+               <el-input v-model="form.remark" type="textarea" placeholder="내용을 입력해 주세요." />
             </el-form-item>
          </el-form>
          <template #footer>
             <div class="dialog-footer">
-               <el-button type="primary" @click="submitForm">确 定</el-button>
-               <el-button @click="cancel">取 消</el-button>
+               <el-button type="primary" @click="submitForm">확인</el-button>
+               <el-button @click="cancel">취소</el-button>
             </div>
          </template>
       </el-dialog>
@@ -192,15 +192,15 @@ const data = reactive({
     configType: undefined
   },
   rules: {
-    configName: [{ required: true, message: "参数名称不能为空", trigger: "blur" }],
-    configKey: [{ required: true, message: "参数键名不能为空", trigger: "blur" }],
-    configValue: [{ required: true, message: "参数键值不能为空", trigger: "blur" }]
+    configName: [{ required: true, message: "설정명항목은 필수입니다.", trigger: "blur" }],
+    configKey: [{ required: true, message: "설정 키항목은 필수입니다.", trigger: "blur" }],
+    configValue: [{ required: true, message: "설정 값항목은 필수입니다.", trigger: "blur" }]
   }
 });
 
 const { queryParams, form, rules } = toRefs(data);
 
-/** 查询参数列表 */
+/** 조회매개변수列表 */
 function getList() {
   loading.value = true;
   listConfig(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
@@ -209,12 +209,12 @@ function getList() {
     loading.value = false;
   });
 }
-/** 取消按钮 */
+/** 취소버튼 */
 function cancel() {
   open.value = false;
   reset();
 }
-/** 表单重置 */
+/** 表单초기화 */
 function reset() {
   form.value = {
     configId: undefined,
@@ -226,12 +226,12 @@ function reset() {
   };
   proxy.resetForm("configRef");
 }
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 function resetQuery() {
   dateRange.value = [];
   proxy.resetForm("queryRef");
@@ -243,35 +243,35 @@ function handleSelectionChange(selection) {
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
-/** 新增按钮操作 */
+/** 추가버튼작업 */
 function handleAdd() {
   reset();
   open.value = true;
-  title.value = "添加参数";
+  title.value = "추가매개변수";
 }
-/** 修改按钮操作 */
+/** 수정버튼작업 */
 function handleUpdate(row) {
   reset();
   const configId = row.configId || ids.value;
   getConfig(configId).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改参数";
+    title.value = "수정매개변수";
   });
 }
-/** 提交按钮 */
+/** 저장버튼 */
 function submitForm() {
   proxy.$refs["configRef"].validate(valid => {
     if (valid) {
       if (form.value.configId != undefined) {
         updateConfig(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          proxy.$modal.msgSuccess("수정되었습니다.");
           open.value = false;
           getList();
         });
       } else {
         addConfig(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          proxy.$modal.msgSuccess("등록되었습니다.");
           open.value = false;
           getList();
         });
@@ -279,26 +279,26 @@ function submitForm() {
     }
   });
 }
-/** 删除按钮操作 */
+/** 삭제버튼작업 */
 function handleDelete(row) {
   const configIds = row.configId || ids.value;
-  proxy.$modal.confirm('是否确认删除参数编号为"' + configIds + '"的数据项？').then(function () {
+  proxy.$modal.confirm('삭제하시겠습니까:매개변수코드: "' + configIds + '" 항목을 처리하시겠습니까?').then(function () {
     return delConfig(configIds);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    proxy.$modal.msgSuccess("삭제되었습니다.");
   }).catch(() => {});
 }
-/** 导出按钮操作 */
+/** 내보내기버튼작업 */
 function handleExport() {
   proxy.download("system/config/export", {
     ...queryParams.value
   }, `config_${new Date().getTime()}.xlsx`);
 }
-/** 刷新缓存按钮操作 */
+/** 캐시 갱신버튼작업 */
 function handleRefreshCache() {
   refreshCache().then(() => {
-    proxy.$modal.msgSuccess("刷新缓存成功");
+    proxy.$modal.msgSuccess("캐시를 갱신했습니다.");
   });
 }
 

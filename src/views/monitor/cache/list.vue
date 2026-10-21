@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card style="height: calc(100vh - 125px)">
           <template #header>
-            <Collection style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">缓存列表</span>
+            <Collection style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">캐시 목록</span>
             <el-button
               style="float: right; padding: 3px 0"
               link
@@ -22,13 +22,13 @@
             style="width: 100%"
           >
             <el-table-column
-              label="序号"
+              label="번호"
               width="60"
               type="index"
             ></el-table-column>
 
             <el-table-column
-              label="缓存名称"
+              label="캐시이름"
               align="center"
               prop="cacheName"
               :show-overflow-tooltip="true"
@@ -36,13 +36,13 @@
             ></el-table-column>
 
             <el-table-column
-              label="备注"
+              label="비고"
               align="center"
               prop="remark"
               :show-overflow-tooltip="true"
             />
             <el-table-column
-              label="操作"
+              label="작업"
               width="60"
               align="center"
               class-name="small-padding fixed-width"
@@ -63,7 +63,7 @@
       <el-col :span="8">
         <el-card style="height: calc(100vh - 125px)">
           <template #header>
-            <Key style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">键名列表</span>
+            <Key style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">키 목록</span>
             <el-button
               style="float: right; padding: 3px 0"
               link
@@ -81,19 +81,19 @@
             style="width: 100%"
           >
             <el-table-column
-              label="序号"
+              label="번호"
               width="60"
               type="index"
             ></el-table-column>
             <el-table-column
-              label="缓存键名"
+              label="캐시키"
               align="center"
               :show-overflow-tooltip="true"
               :formatter="keyFormatter"
             >
             </el-table-column>
             <el-table-column
-              label="操作"
+              label="작업"
               width="60"
               align="center"
               class-name="small-padding fixed-width"
@@ -114,30 +114,30 @@
       <el-col :span="8">
         <el-card :bordered="false" style="height: calc(100vh - 125px)">
           <template #header>
-            <Document style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">缓存内容</span>
+            <Document style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">캐시내용</span>
             <el-button
               style="float: right; padding: 3px 0"
               link
               type="primary"
               icon="Refresh"
               @click="handleClearCacheAll()"
-              >清理全部</el-button
+              >비우기전체</el-button
             >
           </template>
           <el-form :model="cacheForm">
             <el-row :gutter="32">
               <el-col :offset="1" :span="22">
-                <el-form-item label="缓存名称:" prop="cacheName">
+                <el-form-item label="캐시이름:" prop="cacheName">
                   <el-input v-model="cacheForm.cacheName" :readOnly="true" />
                 </el-form-item>
               </el-col>
               <el-col :offset="1" :span="22">
-                <el-form-item label="缓存键名:" prop="cacheKey">
+                <el-form-item label="캐시키:" prop="cacheKey">
                   <el-input v-model="cacheForm.cacheKey" :readOnly="true" />
                 </el-form-item>
               </el-col>
               <el-col :offset="1" :span="22">
-                <el-form-item label="缓存内容:" prop="cacheValue">
+                <el-form-item label="캐시내용:" prop="cacheValue">
                   <el-input
                     v-model="cacheForm.cacheValue"
                     type="textarea"
@@ -167,7 +167,7 @@ const subLoading = ref(false);
 const nowCacheName = ref("");
 const tableHeight = ref(window.innerHeight - 200);
 
-/** 查询缓存名称列表 */
+/** 조회캐시이름列表 */
 function getCacheNames() {
   loading.value = true;
   listCacheName().then(response => {
@@ -176,21 +176,21 @@ function getCacheNames() {
   });
 }
 
-/** 刷新缓存名称列表 */
+/** 캐시 갱신이름列表 */
 function refreshCacheNames() {
   getCacheNames();
-  proxy.$modal.msgSuccess("刷新缓存列表成功");
+  proxy.$modal.msgSuccess("캐시 목록을 갱신했습니다.");
 }
 
-/** 清理指定名称缓存 */
+/** 비우기指定이름캐시 */
 function handleClearCacheName(row) {
   clearCacheName(row.cacheName).then(response => {
-    proxy.$modal.msgSuccess("清理缓存名称[" + row.cacheName + "]成功");
+    proxy.$modal.msgSuccess("비우기캐시이름[" + row.cacheName + "]성공");
     getCacheKeys();
   });
 }
 
-/** 查询缓存键名列表 */
+/** 조회캐시키 목록 */
 function getCacheKeys(row) {
   const cacheName = row !== undefined ? row.cacheName : nowCacheName.value;
   if (cacheName === "") {
@@ -204,41 +204,41 @@ function getCacheKeys(row) {
   });
 }
 
-/** 刷新缓存键名列表 */
+/** 캐시 갱신키 목록 */
 function refreshCacheKeys() {
   getCacheKeys();
-  proxy.$modal.msgSuccess("刷新键名列表成功");
+  proxy.$modal.msgSuccess("새로고침키 목록성공");
 }
 
-/** 清理指定键名缓存 */
+/** 비우기指定키캐시 */
 function handleClearCacheKey(cacheKey) {
   clearCacheKey(nowCacheName.value, cacheKey).then(response => {
-    proxy.$modal.msgSuccess("清理缓存键名[" + cacheKey + "]成功");
+    proxy.$modal.msgSuccess("비우기캐시키[" + cacheKey + "]성공");
     getCacheKeys();
   });
 }
 
-/** 列表前缀去除 */
+/** 列表접두사去除 */
 function nameFormatter(row) {
   return row.cacheName.replace(":", "");
 }
 
-/** 键名前缀去除 */
+/** 키접두사去除 */
 function keyFormatter(cacheKey) {
   return cacheKey.replace(nowCacheName.value, "");
 }
 
-/** 查询缓存内容详细 */
+/** 조회캐시내용상세 */
 function handleCacheValue(cacheKey) {
   getCacheValue(nowCacheName.value, cacheKey).then(response => {
     cacheForm.value = response.data;
   });
 }
 
-/** 清理全部缓存 */
+/** 비우기전체캐시 */
 function handleClearCacheAll() {
   clearCacheAll().then(response => {
-    proxy.$modal.msgSuccess("清理全部缓存成功");
+    proxy.$modal.msgSuccess("비우기전체캐시성공");
   });
 }
 

@@ -21,17 +21,17 @@ const props = defineProps({
   },
   unit: {
     type: String,
-    default: '个'
+    default: '개'
   },
   pieData: {
     type: Array,
     default: function () {
       return [
-        { value: 23, name: "园区仓" },
-        { value: 11, name: "盛泽仓" },
-        { value: 5, name: "常熟仓" },
-        { value: 0, name: "吴江仓" },
-        { value: 0, name: "南京仓" },
+        { value: 23, name: "산업단지 창고" },
+        { value: 11, name: "성쩌 창고" },
+        { value: 5, name: "창수 창고" },
+        { value: 0, name: "우장 창고" },
+        { value: 0, name: "난징 창고" },
       ];
     },
   },
@@ -91,7 +91,7 @@ function initChart() {
         let item = props.pieData.find(c => c.name === param)
         if(!item) return ''
         let rate = !totalCount.value ? 0 : item.value / totalCount.value * 100
-        return `{name|${param}}    占比： {percent|${rate.toFixed(1)}%}`
+        return `{name|${param}}    비중： {percent|${rate.toFixed(1)}%}`
       },
       itemWidth: 14,
       itemGap: 15,
@@ -114,7 +114,7 @@ function initChart() {
     },
     series: [
       {
-        name: '分项占比',
+        name: '항목별 비중',
         type: 'pie',
         radius: ['35%', '50%'],
         center: ['50%', '38%'],

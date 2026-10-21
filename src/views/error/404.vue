@@ -9,16 +9,16 @@
       </div>
       <div class="bullshit">
         <div class="bullshit__oops">
-          404错误!
+          404 페이지를 찾을 수 없음
         </div>
         <div class="bullshit__headline">
           {{ message }}
         </div>
         <div class="bullshit__info">
-          对不起，您正在寻找的页面不存在。尝试检查URL的错误，然后按浏览器上的刷新按钮或尝试在我们的应用程序中找到其他内容。
+          페이지를 찾을 수 없습니다. 주소를 확인하거나 홈 화면으로 돌아가 주세요.
         </div>
         <router-link to="/index" class="bullshit__return-home">
-          返回首页
+          돌아가기홈
         </router-link>
       </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script setup>
 let message = computed(() => {
-  return '找不到网页！'
+  return '페이지를 찾을 수 없습니다.'
 })
 </script>
 

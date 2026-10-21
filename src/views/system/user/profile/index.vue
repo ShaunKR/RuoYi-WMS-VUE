@@ -5,7 +5,7 @@
             <el-card class="box-card">
                <template v-slot:header>
                  <div class="clearfix">
-                   <span>个人信息</span>
+                   <span>개인 정보</span>
                  </div>
                </template>
                <div>
@@ -14,27 +14,27 @@
                   </div>
                   <ul class="list-group list-group-striped">
                      <li class="list-group-item">
-                        <svg-icon icon-class="user" />用户名称
+                        <svg-icon icon-class="user" />사용자 이름
                         <div class="pull-right">{{ state.user.userName }}</div>
                      </li>
                      <li class="list-group-item">
-                        <svg-icon icon-class="phone" />手机号码
+                        <svg-icon icon-class="phone" />휴대전화 번호
                         <div class="pull-right">{{ state.user.phonenumber }}</div>
                      </li>
                      <li class="list-group-item">
-                        <svg-icon icon-class="email" />用户邮箱
+                        <svg-icon icon-class="email" />사용자 이메일
                         <div class="pull-right">{{ state.user.email }}</div>
                      </li>
                      <li class="list-group-item">
-                        <svg-icon icon-class="tree" />所属部门
+                        <svg-icon icon-class="tree" />소속 부서
                         <div class="pull-right" v-if="state.user.dept">{{ state.user.dept.deptName }} / {{ state.postGroup }}</div>
                      </li>
                      <li class="list-group-item">
-                        <svg-icon icon-class="peoples" />所属角色
+                        <svg-icon icon-class="peoples" />소속 역할
                         <div class="pull-right">{{ state.roleGroup }}</div>
                      </li>
                      <li class="list-group-item">
-                        <svg-icon icon-class="date" />创建日期
+                        <svg-icon icon-class="date" />등록일
                         <div class="pull-right">{{ state.user.createTime }}</div>
                      </li>
                   </ul>
@@ -45,14 +45,14 @@
             <el-card>
                <template v-slot:header>
                  <div class="clearfix">
-                   <span>基本资料</span>
+                   <span>기본 정보</span>
                  </div>
                </template>
                <el-tabs v-model="activeTab">
-                  <el-tab-pane label="基本资料" name="userinfo">
+                  <el-tab-pane label="기본 정보" name="userinfo">
                      <userInfo :user="state.user" />
                   </el-tab-pane>
-                  <el-tab-pane label="修改密码" name="resetPwd">
+                  <el-tab-pane label="비밀번호 변경" name="resetPwd">
                      <resetPwd />
                   </el-tab-pane>
                </el-tabs>

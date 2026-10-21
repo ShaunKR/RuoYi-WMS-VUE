@@ -12,15 +12,15 @@ export default {
         "top": 35,
         "height": 40,
         "width": 160,
-        "title": "条形码",
+        "title": "바코드",
         "barcodeType": "code128",
         "testData": "barcode",
         "textType": "barcode",
         "fields": [{
-          "text": "移库单号",
+          "text": "이동 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }],
         "field": "checkOrderNo",
@@ -28,7 +28,7 @@ export default {
         "widthHeightSync": false
       },
       "printElementType": {
-        "title": "条形码",
+        "title": "바코드",
         "type": "barcode"
       }
     }, {
@@ -38,31 +38,31 @@ export default {
         "height": 27,
         "width": 350,
         "fields": [{
-          "text": "盘库单号",
+          "text": "실사 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }, {
-          "text": "仓库",
+          "text": "창고",
           "field": "warehouse"
         }],
-        "title": "盘库单",
+        "title": "실사 전표",
         "field": "checkOrderNo",
         "coordinateSync": false,
         "widthHeightSync": false,
@@ -72,7 +72,7 @@ export default {
         "qrCodeLevel": 0
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -82,28 +82,28 @@ export default {
         "height": 9.75,
         "width": 200,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "盘库状态",
+        "title": "실사 상태",
         "field": "orderStatus",
         "coordinateSync": false,
         "widthHeightSync": false,
@@ -114,7 +114,7 @@ export default {
         "hCenter": 103.125
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -124,35 +124,35 @@ export default {
         "height": 9.75,
         "width": 200,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "盈亏数",
+        "title": "재고 차이",
         "field": "totalQuantity",
         "coordinateSync": false,
         "widthHeightSync": false,
         "qrCodeLevel": 0
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -162,35 +162,35 @@ export default {
         "height": 9.75,
         "width": 200,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "仓库",
+        "title": "창고",
         "field": "warehouseName",
         "coordinateSync": false,
         "widthHeightSync": false,
         "qrCodeLevel": 0
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -200,35 +200,35 @@ export default {
         "height": 9.75,
         "width": 200,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "创建人",
+        "title": "등록자",
         "field": "createBy",
         "coordinateSync": false,
         "widthHeightSync": false,
         "qrCodeLevel": 0
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -238,28 +238,28 @@ export default {
         "height": 9.75,
         "width": 150,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "创建时间",
+        "title": "등록 일시",
         "field": "createTime",
         "coordinateSync": false,
         "widthHeightSync": false,
@@ -270,7 +270,7 @@ export default {
         "hCenter": 126.375
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -280,35 +280,35 @@ export default {
         "height": 9.75,
         "width": 200,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "操作人",
+        "title": "처리자",
         "field": "updateBy",
         "coordinateSync": false,
         "widthHeightSync": false,
         "qrCodeLevel": 0
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -318,28 +318,28 @@ export default {
         "height": 9.75,
         "width": 150,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "操作时间",
+        "title": "처리 일시",
         "field": "updateTime",
         "coordinateSync": false,
         "widthHeightSync": false,
@@ -350,7 +350,7 @@ export default {
         "hCenter": 126.375
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -360,28 +360,28 @@ export default {
         "height": 9.75,
         "width": 150,
         "fields": [{
-          "text": "入库单号",
+          "text": "입고 전표 번호",
           "field": "orderNo"
         }, {
-          "text": "客户",
+          "text": "고객",
           "field": "merchantName"
         }, {
-          "text": "订单号",
+          "text": "주문 번호",
           "field": "orderNo"
         }, {
-          "text": "盘库类型",
+          "text": "실사 유형",
           "field": "shipmentOrderType"
         }, {
-          "text": "盘库状态",
+          "text": "실사 상태",
           "field": "orderStatus"
         }, {
-          "text": "创建日期",
+          "text": "등록일",
           "field": "createTime"
         }, {
-          "text": "备注",
+          "text": "비고",
           "field": "remark"
         }],
-        "title": "备注",
+        "title": "비고",
         "field": "remark",
         "coordinateSync": false,
         "widthHeightSync": false,
@@ -392,7 +392,7 @@ export default {
         "hCenter": 126.375
       },
       "printElementType": {
-        "title": "文本",
+        "title": "텍스트",
         "type": "text"
       }
     }, {
@@ -406,7 +406,7 @@ export default {
         "columns": [
           [{
             "width": 78.57142857142857,
-            "title": "商品名称",
+            "title": "상품명",
             "field": "itemName",
             "checked": true,
             "columnId": "itemName",
@@ -415,7 +415,7 @@ export default {
             "colspan": 1
           }, {
             "width": 78.57142857142857,
-            "title": "规格名称",
+            "title": "규격명",
             "field": "skuName",
             "checked": true,
             "columnId": "skuName",
@@ -425,7 +425,7 @@ export default {
           }, {
             "width": 78.57142857142857,
             "align": "right",
-            "title": "账面库存",
+            "title": "장부 재고",
             "field": "quantity",
             "checked": true,
             "columnId": "quantity",
@@ -438,7 +438,7 @@ export default {
           }, {
             "width": 78.57142857142857,
             "align": "right",
-            "title": "盈亏数",
+            "title": "재고 차이",
             "field": "profitAndLoss",
             "checked": true,
             "columnId": "profitAndLoss",
@@ -451,7 +451,7 @@ export default {
           }, {
             "width": 78.57142857142857,
             "align": "right",
-            "title": "实际库存",
+            "title": "실제 재고",
             "field": "checkQuantity",
             "checked": true,
             "columnId": "checkQuantity",
@@ -465,7 +465,7 @@ export default {
         ]
       },
       "printElementType": {
-        "title": "表格",
+        "title": "표",
         "type": "table",
         "editable": true,
         "columnDisplayEditable": true,

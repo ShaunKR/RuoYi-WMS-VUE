@@ -5,7 +5,7 @@
     <top-nav id="topmenu-container" class="topmenu-container" v-if="settingsStore.topNav" />
 
     <div class="right-menu">
-      <div style="font-size: 16px;font-weight: bold;margin-right: 10px;">技术支持：关注“程序员诚哥”微信公众号，回复：支持</div>
+      <div style="font-size: 16px;font-weight: bold;margin-right: 10px;">원본 프로젝트: ichengle.top · RuoYi WMS</div>
       <div class="avatar-container">
         <el-dropdown @command="handleCommand" class="right-menu-item hover-effect" trigger="click">
           <div class="avatar-wrapper">
@@ -15,10 +15,10 @@
           <template #dropdown>
             <el-dropdown-menu>
               <router-link to="/user/profile">
-                <el-dropdown-item>个人中心</el-dropdown-item>
+                <el-dropdown-item>내 정보</el-dropdown-item>
               </router-link>
               <el-dropdown-item divided command="logout">
-                <span>退出登录</span>
+                <span>로그아웃</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -64,9 +64,9 @@ function handleCommand(command) {
 }
 
 function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('로그아웃하시겠습니까?', '안내', {
+    confirmButtonText: '확인',
+    cancelButtonText: '취소',
     type: 'warning'
   }).then(() => {
     userStore.logOut().then(() => {

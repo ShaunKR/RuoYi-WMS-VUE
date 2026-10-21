@@ -1,14 +1,15 @@
 <template>
   <div class="app-container home">
+    <el-alert title="아래 내용은 원본 개발팀의 프로젝트 소개입니다." type="info" :closable="false" show-icon />
     <el-row class="pl20 pr20 pb20 pt20" :gutter="10">
       <el-col :span="12">
         <el-card shadow="always" style="padding-bottom: 20px;font-size: 14px" >
           <div slot="header">
-            <span style="font-size: large;font-weight: bold">SaaS版已上线，如需体验，请在公众号内回复：saas</span>
+            <span style="font-size: large;font-weight: bold">원본 개발팀의 SaaS 버전 안내</span>
           </div>
           <div style="display: flex;align-items: center">
             <div class="first" style="font-size:20px;line-height: 50px;background: linear-gradient(to right, red, blue);-webkit-background-clip: text;color: transparent;">
-              轻量级库存管理工具，不用安装，自动升级，让仓库效率提高5倍，让出错概率降低5倍。 集中入库、出库、扫描、一物一码、商品、库存、供应商、结算等优质功能于一体，为商家提供更全面库存处理解决方案。
+              설치 없이 자동 업데이트되는 경량 재고 관리 도구로, 입고·출고·스캔·상품·재고·공급업체·정산 기능을 통합합니다.
             </div>
           </div>
         </el-card>
@@ -16,21 +17,21 @@
       <el-col :span="12">
         <el-card style="font-size: 14px">
           <div slot="header">
-            <span style="font-size: large;font-weight: bold">更多内容</span>
+            <span style="font-size: large;font-weight: bold">더 보기</span>
           </div>
           <div>
             <div style="font-size:20px;line-height: 50px;background: linear-gradient(to right, red, blue);-webkit-background-clip: text;color: transparent;">
               <div>
-                <span style="font-size: large;font-weight: bold">v2 advance预览：</span><a href="http://kucun.ichengle.top/" target="_blank">http://kucun.ichengle.top/</a>
+                <span style="font-size: large;font-weight: bold">v2 advance미리보기：</span><a href="http://kucun.ichengle.top/" target="_blank">http://kucun.ichengle.top/</a>
               </div>
               <div>
-                <span style="font-size: large;font-weight: bold">v1.0预览：</span><a href="http://wms.ichengle.top/" target="_blank">http://wms.ichengle.top/</a>
+                <span style="font-size: large;font-weight: bold">v1.0미리보기：</span><a href="http://wms.ichengle.top/" target="_blank">http://wms.ichengle.top/</a>
               </div>
               <div>
-                <span style="font-size: large;font-weight: bold">讲解视频：</span><a href="https://www.bilibili.com/video/BV1ys4y1q7uG/" target="_blank">https://www.bilibili.com/video/BV1ys4y1q7uG/</a>
+                <span style="font-size: large;font-weight: bold">기능 설명 영상：</span><a href="https://www.bilibili.com/video/BV1ys4y1q7uG/" target="_blank">https://www.bilibili.com/video/BV1ys4y1q7uG/</a>
               </div>
               <div>
-                <span style="font-size: large;font-weight: bold">若依实战视频：</span><a href="https://www.bilibili.com/video/BV1Fi4y1q74p/" target="_blank">https://www.bilibili.com/video/BV1Fi4y1q74p/</a>
+                <span style="font-size: large;font-weight: bold">RuoYi 실습 영상：</span><a href="https://www.bilibili.com/video/BV1Fi4y1q74p/" target="_blank">https://www.bilibili.com/video/BV1Fi4y1q74p/</a>
               </div>
             </div>
           </div>
@@ -43,27 +44,27 @@
       <el-col :span="12">
         <el-card shadow="always" style="padding-bottom: 20px;font-size: 14px;margin-bottom: 20px; margin-top: 20px" >
           <div slot="header">
-            <span style="font-size: large;font-weight: bold">招聘全栈开发</span>
+            <span style="font-size: large;font-weight: bold">원본 개발팀의 풀스택 개발자 모집 안내</span>
           </div>
           <div style="display: flex;align-items: center">
             <div class="first" style="font-size:20px;line-height: 50px;background: linear-gradient(to right, red, blue);-webkit-background-clip: text;color: transparent;">
-              参与开发基于jdk17和vue3的ruoyi-mall、ruoyi-erp-进销存。<br>
-              要求：对若依框架和ruoyi-wms、ruoyi-mall 有一定的认知。并且有一定的空余时间。<br>
-              全职、兼职、实习都可。我们在苏州，远程或现场参与开发都可。<br>
-              有兴趣的可以在公众号内回复：应聘。<br>
+              Java 17과 Vue 3 기반 ruoyi-mall 및 ruoyi-erp 개발에 참여합니다.<br>
+              RuoYi 프레임워크와 관련 프로젝트에 대한 이해 및 참여 시간이 필요합니다.<br>
+              정규직, 파트타임, 인턴 참여가 가능하며 쑤저우 현장 또는 원격으로 참여할 수 있습니다.<br>
+              관심이 있다면 원본 개발팀의 위챗 공식 계정에 지원 의사를 전달하세요.<br>
             </div>
           </div>
         </el-card>
         <el-card shadow="always" style="padding-bottom: 20px;font-size: 14px;margin-bottom: 20px;" >
           <div slot="header">
-            <span style="font-size: large;font-weight: bold">招聘自媒体运营</span>
+            <span style="font-size: large;font-weight: bold">원본 개발팀의 콘텐츠 운영자 모집 안내</span>
           </div>
           <div style="display: flex;align-items: center">
             <div class="first" style="font-size:20px;line-height: 50px;background: linear-gradient(to right, red, blue);-webkit-background-clip: text;color: transparent;">
-              参与ruoyi-wms、ruoyi-mall、ruoyi-erp-进销存项目的自媒体运营。<br>
-              要求做过短视频编辑或公众号文章编辑，并且对我们的开源项目有一定的了解。<br>
-              全职、兼职、实习都可。我们在苏州，远程或现场参与开发都可。<br>
-              有兴趣的可以在公众号内回复：应聘。<br>
+              ruoyi-wms, ruoyi-mall, ruoyi-erp 프로젝트의 콘텐츠 운영에 참여합니다.<br>
+              짧은 영상이나 위챗 게시물 편집 경험과 프로젝트에 대한 이해가 필요합니다.<br>
+              정규직, 파트타임, 인턴 참여가 가능하며 쑤저우 현장 또는 원격으로 참여할 수 있습니다.<br>
+              관심이 있다면 원본 개발팀의 위챗 공식 계정에 지원 의사를 전달하세요.<br>
             </div>
           </div>
         </el-card>
@@ -71,38 +72,38 @@
       <el-col :span="12">
         <el-card style="padding-bottom: 20px; font-size: 14px">
           <div slot="header">
-            <span style="font-size: large;font-weight: bold">发展历程</span>
+            <span style="font-size: large;font-weight: bold">원본 개발팀의 프로젝트 연혁</span>
           </div>
           <div style="padding-top: 20px">
             <el-timeline >
-              <el-timeline-item placement="top" timestamp="2018年">
+              <el-timeline-item placement="top" timestamp="2018년">
                 <el-card>
-                  <h4>参与京东服务市场商品分析应用开发，参与京东服务市场会员积分应用开发</h4>
+                  <h4>징둥 서비스 마켓의 상품 분석 및 회원 포인트 앱 개발 참여</h4>
                 </el-card>
               </el-timeline-item>
-              <el-timeline-item placement="top" timestamp="2019年">
+              <el-timeline-item placement="top" timestamp="2019년">
                 <el-card>
-                  <h4>参与京东服务市场商品搬家应用开发，参与京东服务市场商品搬家应用开发，参与拼多多服务市场订单应用开发</h4>
+                  <h4>징둥 상품 이전 앱 및 핀둬둬 주문 앱 개발 참여</h4>
                 </el-card>
               </el-timeline-item>
-              <el-timeline-item placement="top" timestamp="2020年">
+              <el-timeline-item placement="top" timestamp="2020년">
                 <el-card>
-                  <h4>所参与开发的拼多多订单应用排名服务市场类目第一，开始快手服务市场订单应用开发</h4>
+                  <h4>핀둬둬 주문 앱의 마켓 카테고리 1위 달성 및 콰이쇼우 주문 앱 개발 시작</h4>
                 </el-card>
               </el-timeline-item>
-              <el-timeline-item placement="top" timestamp="2021年">
+              <el-timeline-item placement="top" timestamp="2021년">
                 <el-card>
-                  <h4>日处理拼多多订单200万条，开始美团、饿了么应用市场应用开发</h4>
+                  <h4>핀둬둬 주문 일일 200만 건 처리, 메이퇀·어러머 앱 개발 시작</h4>
                 </el-card>
               </el-timeline-item>
-              <el-timeline-item placement="top" timestamp="2022年">
+              <el-timeline-item placement="top" timestamp="2022년">
                 <el-card>
-                  <h4>累计服务10万+电商平台店铺、5万+外卖店铺。开始抖音、淘宝服务市场订单应用开发，开源ruoyi-wms</h4>
+                  <h4>전자상거래 매장 10만 곳 및 배달 매장 5만 곳에 서비스 제공. 더우인·타오바오 주문 앱 개발 및 ruoyi-wms 공개</h4>
                 </el-card>
               </el-timeline-item>
-              <el-timeline-item placement="top" timestamp="2023年">
+              <el-timeline-item placement="top" timestamp="2023년">
                 <el-card>
-                  <h4>B站播放量破万，开源ruoyi-mall，公众号粉丝破万，wms-saas火热研发中</h4>
+                  <h4>빌리빌리 조회수와 위챗 구독자 1만 달성, ruoyi-mall 공개 및 WMS SaaS 개발</h4>
                 </el-card>
               </el-timeline-item>
             </el-timeline>

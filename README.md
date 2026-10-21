@@ -1,3 +1,7 @@
+## 한국어 사용 안내
+
+한국어 화면 적용 범위와 실행 시 주의점은 [한국어 화면 문서](docs/localization.ko.md)를 참고하세요.
+
 ## 后端项目地址
 #### gitee地址
 https://gitee.com/zccbbg/wms-ruoyi

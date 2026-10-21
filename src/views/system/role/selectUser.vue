@@ -1,43 +1,43 @@
 <template>
    <!-- 授权用户 -->
-   <el-dialog title="选择用户" v-model="visible" width="800px" top="5vh" append-to-body>
+   <el-dialog title="선택사용자" v-model="visible" width="800px" top="5vh" append-to-body>
       <el-form :model="queryParams" ref="queryRef" :inline="true">
-         <el-form-item label="用户名称" prop="userName">
+         <el-form-item label="사용자 이름" prop="userName">
             <el-input
                v-model="queryParams.userName"
-               placeholder="请输入用户名称"
+               placeholder="입력해 주세요:사용자 이름"
                clearable
                style="width: 200px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="手机号码" prop="phonenumber">
+         <el-form-item label="휴대전화 번호" prop="phonenumber">
             <el-input
                v-model="queryParams.phonenumber"
-               placeholder="请输入手机号码"
+               placeholder="휴대전화 번호를 입력해 주세요."
                clearable
                style="width: 200px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+            <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
          </el-form-item>
       </el-form>
       <el-row>
          <el-table @row-click="clickRow" ref="refTable" :data="userList" @selection-change="handleSelectionChange" height="260px">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column label="用户名称" prop="userName" :show-overflow-tooltip="true" />
-            <el-table-column label="用户昵称" prop="nickName" :show-overflow-tooltip="true" />
-            <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
-            <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
-            <el-table-column label="状态" align="center" prop="status">
+            <el-table-column label="사용자 이름" prop="userName" :show-overflow-tooltip="true" />
+            <el-table-column label="사용자 별명" prop="nickName" :show-overflow-tooltip="true" />
+            <el-table-column label="이메일" prop="email" :show-overflow-tooltip="true" />
+            <el-table-column label="휴대전화" prop="phonenumber" :show-overflow-tooltip="true" />
+            <el-table-column label="상태" align="center" prop="status">
                <template #default="scope">
                   <dict-tag :options="sys_normal_disable" :value="scope.row.status" />
                </template>
             </el-table-column>
-            <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+            <el-table-column label="등록 일시" align="center" prop="createTime" width="180">
                <template #default="scope">
                   <span>{{ parseTime(scope.row.createTime) }}</span>
                </template>
@@ -53,8 +53,8 @@
       </el-row>
       <template #footer>
          <div class="dialog-footer">
-            <el-button type="primary" @click="handleSelectUser">确 定</el-button>
-            <el-button @click="visible = false">取 消</el-button>
+            <el-button type="primary" @click="handleSelectUser">확인</el-button>
+            <el-button @click="visible = false">취소</el-button>
          </div>
       </template>
    </el-dialog>
@@ -91,7 +91,7 @@ function show() {
   getList();
   visible.value = true;
 }
-/**选择行 */
+/**선택行 */
 function clickRow(row) {
   proxy.$refs["refTable"].toggleRowSelection(row);
 }
@@ -106,23 +106,23 @@ function getList() {
     total.value = res.total;
   });
 }
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 function handleQuery() {
   queryParams.pageNum = 1;
   getList();
 }
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 const emit = defineEmits(["ok"]);
-/** 选择授权用户操作 */
+/** 선택권한 부여사용자작업 */
 function handleSelectUser() {
   const roleId = queryParams.roleId;
   const uIds = userIds.value.join(",");
   if (uIds == "") {
-    proxy.$modal.msgError("请选择要分配的用户");
+    proxy.$modal.msgError("할당할 사용자를 선택해 주세요.");
     return;
   }
   authUserSelectAll({ roleId: roleId, userIds: uIds }).then(res => {

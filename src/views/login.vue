@@ -1,14 +1,14 @@
 <template>
   <div class="login">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">ruoyi-wms后台管理系统</h3>
+      <h3 class="title">RuoYi WMS 창고 관리</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="账号"
+          placeholder="아이디"
         >
           <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
         </el-input>
@@ -19,7 +19,7 @@
           type="password"
           size="large"
           auto-complete="off"
-          placeholder="密码"
+          placeholder="비밀번호"
           @keyup.enter="handleLogin"
         >
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
@@ -30,7 +30,7 @@
           v-model="loginForm.code"
           size="large"
           auto-complete="off"
-          placeholder="验证码"
+          placeholder="인증 코드"
           style="width: 63%"
           @keyup.enter="handleLogin"
         >
@@ -40,7 +40,7 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">비밀번호 기억하기</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -49,8 +49,8 @@
           style="width:45%;"
           @click.prevent="handleLogin"
         >
-          <span v-if="!loading">登 录</span>
-          <span v-else>登 录 中...</span>
+          <span v-if="!loading">로그인</span>
+          <span v-else>로그인 중...</span>
         </el-button>
         <el-button
           size="large"
@@ -58,33 +58,33 @@
           style="width:45%;"
           @click.native.prevent="handleTry"
         >
-          <span>获取体验账号</span>
+          <span>체험 계정 안내</span>
         </el-button>
         <div style="float: right;" v-if="register">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+          <router-link class="link-type" :to="'/register'">회원가입</router-link>
         </div>
       </el-form-item>
     </el-form>
     <el-dialog
-      title="公众号二维码"
+      title="체험 계정 안내"
       v-model="dialogVisible"
       append-to-body
       :show-close="false"
       width="30%">
       <div style="text-align: center">
-        <span class="font-title-large"><span class="color-main font-extra-large">关注公众号</span>回复<span class="color-main font-extra-large">库存</span>获取体验账号</span>
+        <span class="font-title-large">원본 개발자의 위챗 공식 계정에서 체험 계정을 안내합니다.</span>
         <br>
         <img src="@/assets/logo/gzh.jpg" width="160" height="160" style="margin-top: 10px">
       </div>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="dialogConfirm">确定</el-button>
+          <el-button type="primary" @click="dialogConfirm">확인</el-button>
         </div>
       </template>
     </el-dialog>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2017-2024 ichengle.top 技术支持：关注“程序员诚哥”微信公众号，回复：支持</span>
+      <span>Copyright © 2017-2024 ichengle.top 원본 프로젝트: ichengle.top · RuoYi WMS</span>
     </div>
   </div>
 </template>
@@ -108,9 +108,9 @@ const loginForm = ref({
 });
 
 const loginRules = {
-  username: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
-  password: [{ required: true, trigger: "blur", message: "请输入您的密码" }],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+  username: [{ required: true, trigger: "blur", message: "아이디를 입력해 주세요." }],
+  password: [{ required: true, trigger: "blur", message: "비밀번호를 입력해 주세요." }],
+  code: [{ required: true, trigger: "change", message: "인증 코드를 입력해 주세요." }]
 };
 
 const codeUrl = ref("");

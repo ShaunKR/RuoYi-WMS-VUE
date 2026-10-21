@@ -1,28 +1,28 @@
 <template>
    <div class="app-container">
       <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-         <el-form-item label="登录地址" prop="ipaddr">
+         <el-form-item label="로그인주소" prop="ipaddr">
             <el-input
                v-model="queryParams.ipaddr"
-               placeholder="请输入登录地址"
+               placeholder="입력해 주세요:로그인주소"
                clearable
                style="width: 240px;"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="用户名称" prop="userName">
+         <el-form-item label="사용자 이름" prop="userName">
             <el-input
                v-model="queryParams.userName"
-               placeholder="请输入用户名称"
+               placeholder="입력해 주세요:사용자 이름"
                clearable
                style="width: 240px;"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="状态" prop="status">
+         <el-form-item label="상태" prop="status">
             <el-select
                v-model="queryParams.status"
-               placeholder="登录状态"
+               placeholder="로그인상태"
                clearable
                style="width: 240px"
             >
@@ -34,20 +34,20 @@
                />
             </el-select>
          </el-form-item>
-         <el-form-item label="登录时间" style="width: 308px">
+         <el-form-item label="로그인 일시" style="width: 308px">
             <el-date-picker
                v-model="dateRange"
                value-format="YYYY-MM-DD HH:mm:ss"
                type="daterange"
                range-separator="-"
-               start-placeholder="开始日期"
-               end-placeholder="结束日期"
+               start-placeholder="시작일"
+               end-placeholder="종료일"
                :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
             ></el-date-picker>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+            <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
          </el-form-item>
       </el-form>
 
@@ -60,7 +60,7 @@
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['monitor:logininfor:remove']"
-            >删除</el-button>
+            >삭제</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -69,7 +69,7 @@
                icon="Delete"
                @click="handleClean"
                v-hasPermi="['monitor:logininfor:remove']"
-            >清空</el-button>
+            >비우기</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -79,7 +79,7 @@
                :disabled="single"
                @click="handleUnlock"
                v-hasPermi="['monitor:logininfor:unlock']"
-            >解锁</el-button>
+            >잠금 해제</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -88,26 +88,26 @@
                icon="Download"
                @click="handleExport"
                v-hasPermi="['monitor:logininfor:export']"
-            >导出</el-button>
+            >내보내기</el-button>
          </el-col>
          <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
 
       <el-table ref="logininforRef" v-loading="loading" :data="logininforList" @selection-change="handleSelectionChange" :default-sort="defaultSort" @sort-change="handleSortChange">
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column label="访问编号" align="center" prop="infoId" />
-         <el-table-column label="用户名称" align="center" prop="userName" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
-         <el-table-column label="地址" align="center" prop="ipaddr" :show-overflow-tooltip="true" />
-         <el-table-column label="登录地点" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
-         <el-table-column label="操作系统" align="center" prop="os" :show-overflow-tooltip="true" />
-         <el-table-column label="浏览器" align="center" prop="browser" :show-overflow-tooltip="true" />
-         <el-table-column label="登录状态" align="center" prop="status">
+         <el-table-column label="접속코드" align="center" prop="infoId" />
+         <el-table-column label="사용자 이름" align="center" prop="userName" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
+         <el-table-column label="주소" align="center" prop="ipaddr" :show-overflow-tooltip="true" />
+         <el-table-column label="접속 위치" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
+         <el-table-column label="작업시스템" align="center" prop="os" :show-overflow-tooltip="true" />
+         <el-table-column label="브라우저" align="center" prop="browser" :show-overflow-tooltip="true" />
+         <el-table-column label="로그인상태" align="center" prop="status">
             <template #default="scope">
                <dict-tag :options="sys_common_status" :value="scope.row.status" />
             </template>
          </el-table-column>
-         <el-table-column label="描述" align="center" prop="msg" :show-overflow-tooltip="true" />
-         <el-table-column label="访问时间" align="center" prop="loginTime" sortable="custom" :sort-orders="['descending', 'ascending']" width="180">
+         <el-table-column label="설명" align="center" prop="msg" :show-overflow-tooltip="true" />
+         <el-table-column label="접속 일시" align="center" prop="loginTime" sortable="custom" :sort-orders="['descending', 'ascending']" width="180">
             <template #default="scope">
                <span>{{ parseTime(scope.row.loginTime) }}</span>
             </template>
@@ -152,7 +152,7 @@ const queryParams = ref({
   isAsc: undefined
 });
 
-/** 查询登录日志列表 */
+/** 조회로그인 로그列表 */
 function getList() {
   loading.value = true;
   list(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
@@ -161,12 +161,12 @@ function getList() {
     loading.value = false;
   });
 }
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 function resetQuery() {
   dateRange.value = [];
   proxy.resetForm("queryRef");
@@ -180,41 +180,41 @@ function handleSelectionChange(selection) {
   single.value = selection.length != 1;
   selectName.value = selection.map(item => item.userName);
 }
-/** 排序触发事件 */
+/** 정렬触发事件 */
 function handleSortChange(column, prop, order) {
   queryParams.value.orderByColumn = column.prop;
   queryParams.value.isAsc = column.order;
   getList();
 }
-/** 删除按钮操作 */
+/** 삭제버튼작업 */
 function handleDelete(row) {
   const infoIds = row.infoId || ids.value;
-  proxy.$modal.confirm('是否确认删除访问编号为"' + infoIds + '"的数据项?').then(function () {
+  proxy.$modal.confirm('삭제하시겠습니까:접속코드: "' + infoIds + '" 항목을 처리하시겠습니까?').then(function () {
     return delLogininfor(infoIds);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    proxy.$modal.msgSuccess("삭제되었습니다.");
   }).catch(() => {});
 }
-/** 清空按钮操作 */
+/** 비우기버튼작업 */
 function handleClean() {
-  proxy.$modal.confirm("是否确认清空所有登录日志数据项?").then(function () {
+  proxy.$modal.confirm("모두 비우시겠습니까:로그인 로그항목?").then(function () {
     return cleanLogininfor();
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("清空成功");
+    proxy.$modal.msgSuccess("비우기성공");
   }).catch(() => {});
 }
-/** 解锁按钮操作 */
+/** 잠금 해제버튼작업 */
 function handleUnlock() {
   const username = selectName.value;
-  proxy.$modal.confirm('是否确认解锁用户"' + username + '"数据项?').then(function () {
+  proxy.$modal.confirm('잠금을 해제하시겠습니까:사용자"' + username + '"항목?').then(function () {
     return unlockLogininfor(username);
   }).then(() => {
-    proxy.$modal.msgSuccess("用户" + username + "解锁成功");
+    proxy.$modal.msgSuccess("사용자" + username + "잠금 해제성공");
   }).catch(() => {});
 }
-/** 导出按钮操作 */
+/** 내보내기버튼작업 */
 function handleExport() {
   proxy.download("monitor/logininfor/export", {
     ...queryParams.value,

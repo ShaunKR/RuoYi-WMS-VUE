@@ -1,41 +1,41 @@
 <template>
-  <el-drawer :model-value="show" title="选择库存" @close="handleCancelClick" :size="size" :close-on-click-modal="false"
+  <el-drawer :model-value="show" title="재고 선택" @close="handleCancelClick" :size="size" :close-on-click-modal="false"
              append-to-body>
     <el-form :inline="true" label-width="68px">
-      <el-form-item label="商品名称">
-        <el-input v-model="query.itemName" clearable placeholder="商品名称"></el-input>
+      <el-form-item label="상품명">
+        <el-input v-model="query.itemName" clearable placeholder="상품명"></el-input>
       </el-form-item>
-      <el-form-item label="商品编号">
-        <el-input class="w200" v-model="query.itemCode" clearable placeholder="商品编号"></el-input>
+      <el-form-item label="상품 코드">
+        <el-input class="w200" v-model="query.itemCode" clearable placeholder="상품 코드"></el-input>
       </el-form-item>
-      <el-form-item label="规格名称">
-        <el-input class="w200" v-model="query.skuName" clearable placeholder="规格名称"></el-input>
+      <el-form-item label="규격명">
+        <el-input class="w200" v-model="query.skuName" clearable placeholder="규격명"></el-input>
       </el-form-item>
-      <el-form-item label="规格编号">
-        <el-input class="w200" v-model="query.barcode" clearable placeholder="规格编号"></el-input>
+      <el-form-item label="규격 코드">
+        <el-input class="w200" v-model="query.barcode" clearable placeholder="규격 코드"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="loadAll">查询</el-button>
+        <el-button type="primary" @click="loadAll">조회</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="list" @selection-change="handleSelectionChange" border :row-key="getRowKey" empty-text="暂无库存"
+    <el-table :data="list" @selection-change="handleSelectionChange" border :row-key="getRowKey" empty-text="재고가 없습니다."
               v-loading="loading" ref="inventorySelectFormRef" cell-class-name="my-cell" class="mt20">
       <el-table-column type="selection" width="55" :reserve-selection="true" :selectable="judgeSelectable"/>
-      <el-table-column label="商品信息" prop="itemId">
+      <el-table-column label="상품 정보" prop="itemId">
         <template #default="{ row }">
           <div>{{ row.item.itemName }}</div>
-          <div v-if="row.item.itemCode">编号：{{ row.item.itemCode }}</div>
-          <div v-if="row.item.itemBrand">品牌：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}</div>
+          <div v-if="row.item.itemCode">코드：{{ row.item.itemCode }}</div>
+          <div v-if="row.item.itemBrand">브랜드：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="规格信息">
+      <el-table-column label="규격 정보">
         <template #default="{ row }">
           <div>{{ row.itemSku.skuName }}</div>
-          <div v-if="row.itemSku.skuCode">编号：{{ row.itemSku.skuCode }}</div>
-          <div v-if="row.itemSku.barcode">条码：{{ row.itemSku.barcode }}</div>
+          <div v-if="row.itemSku.skuCode">코드：{{ row.itemSku.skuCode }}</div>
+          <div v-if="row.itemSku.barcode">바코드：{{ row.itemSku.barcode }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="剩余库存" prop="quantity" align="right">
+      <el-table-column label="잔여 재고" prop="quantity" align="right">
         <template #default="{ row }">
           <el-statistic :value="Number(row.quantity)" :precision="0"/>
         </template>
@@ -57,8 +57,8 @@
         <span>
         </span>
         <span>
-          <el-button @click="handleCancelClick">取消</el-button>
-          <el-button type="primary" @click="handleOkClick">确认</el-button>
+          <el-button @click="handleCancelClick">취소</el-button>
+          <el-button type="primary" @click="handleOkClick">확인</el-button>
       </span>
       </div>
     </template>

@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-card>
       <el-form :model="queryParams" ref="queryFormRef" :inline="true" label-width="68px">
-        <el-form-item label="商品编号" prop="itemCode">
-          <el-input v-model="queryParams.itemCode" placeholder="请输入商品编号" clearable @keyup.enter="handleQuery"/>
+        <el-form-item label="상품 코드" prop="itemCode">
+          <el-input v-model="queryParams.itemCode" placeholder="상품 코드를 입력해 주세요." clearable @keyup.enter="handleQuery"/>
         </el-form-item>
-        <el-form-item label="商品名称" prop="itemName">
-          <el-input v-model="queryParams.itemName" placeholder="请输入商品名称" clearable @keyup.enter="handleQuery"/>
+        <el-form-item label="상품명" prop="itemName">
+          <el-input v-model="queryParams.itemName" placeholder="상품명을 입력해 주세요." clearable @keyup.enter="handleQuery"/>
         </el-form-item>
-        <el-form-item label="商品品牌" prop="itemBrand">
+        <el-form-item label="상품 브랜드" prop="itemBrand">
           <el-select v-model="queryParams.itemBrand" clearable filterable>
             <el-option
               v-for="item in useWmsStore().itemBrandList"
@@ -19,8 +19,8 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-          <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+          <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+          <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -28,10 +28,10 @@
       <div style="display: flex;align-items: start">
         <div>
           <div style="display: flex;align-items: center;justify-content: space-between">
-            <span style="font-size: 18px;line-height: 18px">商品分类</span>
+            <span style="font-size: 18px;line-height: 18px">상품 분류</span>
             <el-button class="mr10" style="font-size:12px;line-height: 14px" plain
                      @click="handleAddType(false)"
-                     type="primary" icon="Plus">新增分类
+                     type="primary" icon="Plus">분류 추가
             </el-button>
           </div>
           <el-tree
@@ -44,7 +44,7 @@
             :default-expand-all="true"
             :highlight-current="true"
             node-key="label"
-            current-node-key="全部"
+            current-node-key="전체"
             draggable
             :allow-drop="collapse"
             @node-drop="handleNodeDrop"
@@ -55,11 +55,11 @@
               <span>{{ node.label }}</span>
               <span>
                 <el-button type="primary" @click.stop="append(data)" link
-                         v-if="data.label !== '全部' && node.level < 2" icon="Plus" style="font-size: 12px">新增子分类</el-button>
+                         v-if="data.label !== '전체' && node.level < 2" icon="Plus" style="font-size: 12px">하위 분류 추가</el-button>
                 <el-button type="primary" @click.stop="remove(node, data)" link
-                         v-if="data.label !== '全部'" icon="Delete" style="font-size: 12px">删除</el-button>
+                         v-if="data.label !== '전체'" icon="Delete" style="font-size: 12px">삭제</el-button>
                 <el-button type="primary" icon="Edit" @click.stop="edit(node, data)" link
-                         v-if="data.label !== '全部'" style="font-size: 12px">修改</el-button>
+                         v-if="data.label !== '전체'" style="font-size: 12px">수정</el-button>
               </span>
             </span>
             </template>
@@ -67,61 +67,61 @@
         </div>
         <div style="width: 100%;position: relative">
           <div style="display: flex;align-items: start;justify-content: space-between">
-            <span class="mr10" style="font-size: 18px;">商品列表</span>
-            <el-button type="primary" plain icon="Plus" @click="handleAdd" class="mb10">新增商品</el-button>
+            <span class="mr10" style="font-size: 18px;">상품 목록</span>
+            <el-button type="primary" plain icon="Plus" @click="handleAdd" class="mb10">상품 추가</el-button>
           </div>
-          <el-table :data="itemList" @selection-change="handleSelectionChange" :span-method="spanMethod" border empty-text="暂无商品" v-loading="loading" cell-class-name="my-cell">
-            <el-table-column label="商品信息" prop="itemId">
+          <el-table :data="itemList" @selection-change="handleSelectionChange" :span-method="spanMethod" border empty-text="등록된 상품이 없습니다." v-loading="loading" cell-class-name="my-cell">
+            <el-table-column label="상품 정보" prop="itemId">
               <template #default="{ row }">
                 <div>{{ row.item.itemName + (row.item.itemCode ? ('(' +  row.item.itemCode + ')') : '') }}</div>
-                <div v-if="row.item.itemBrand">{{ row.item.itemBrand ? ('品牌：' + useWmsStore().itemBrandMap.get(row.item.itemBrand)?.brandName) : '' }}</div>
-                <div v-if="row.item.itemCategory">{{ row.item.itemCategory ? ('分类：' + useWmsStore().itemCategoryMap.get(row.item.itemCategory)?.categoryName) : '' }}</div>
+                <div v-if="row.item.itemBrand">{{ row.item.itemBrand ? ('브랜드：' + useWmsStore().itemBrandMap.get(row.item.itemBrand)?.brandName) : '' }}</div>
+                <div v-if="row.item.itemCategory">{{ row.item.itemCategory ? ('분류：' + useWmsStore().itemCategoryMap.get(row.item.itemCategory)?.categoryName) : '' }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="规格信息" prop="skuName" align="left">
+            <el-table-column label="규격 정보" prop="skuName" align="left">
               <template #default="{ row }">
                 <div>{{ row.itemSku.skuName }}</div>
-                <div v-if="row.itemSku.skuCode">编号：{{ row.itemSku.skuCode }}</div>
-                <div v-if="row.itemSku.barcode">条码：{{ row.itemSku.barcode }}</div>
+                <div v-if="row.itemSku.skuCode">코드：{{ row.itemSku.skuCode }}</div>
+                <div v-if="row.itemSku.barcode">바코드：{{ row.itemSku.barcode }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="金额(元)" width="160" align="left">
+            <el-table-column label="금액(위안)" width="160" align="left">
               <template #default="{ row }">
                 <div v-if="row.itemSku.costPrice" class="flex-space-between">
-                  <span>成本价：</span>
+                  <span>원가：</span>
                   <div>{{ (row.itemSku.costPrice || row.itemSku.costPrice === 0) ? row.itemSku.costPrice : '' }}</div>
                 </div>
                 <div v-if="row.itemSku.sellingPrice" class="flex-space-between">
-                  <span>销售价：</span>
+                  <span>판매가：</span>
                   <div>{{ (row.itemSku.sellingPrice || row.itemSku.sellingPrice === 0) ? row.itemSku.sellingPrice : '' }}</div>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="重量(kg)" width="160" align="left">
+            <el-table-column label="중량(kg)" width="160" align="left">
               <template #default="{ row }">
                 <div v-if="row.itemSku.netWeight" class="flex-space-between">
-                  <span>净重：</span>
+                  <span>순중량：</span>
                   <div>
                     {{ (row.itemSku.netWeight || row.itemSku.netWeight === 0) ? row.itemSku.netWeight : '' }}
                   </div>
                 </div>
                 <div v-if="row.itemSku.grossWeight" class="flex-space-between">
-                  <span>毛重：</span>
+                  <span>총중량：</span>
                   <div>
                     {{ (row.itemSku.grossWeight || row.itemSku.grossWeight === 0) ? row.itemSku.grossWeight : '' }}
                   </div>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="长宽高(cm)" align="right" width="250">
+            <el-table-column label="길이·너비·높이(cm)" align="right" width="250">
               <template #default="{ row }">
                 <div>{{ getVolumeText(row.itemSku) }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" align="right" prop="itemId" width="200">
+            <el-table-column label="작업" align="right" prop="itemId" width="200">
               <template #default="scope">
-                <el-button link type="primary" @click="handleDelete(scope.row)" icon="Delete">删除</el-button>
-                <el-button link type="primary" @click="handleUpdate(scope.row)" icon="Edit">修改</el-button>
+                <el-button link type="primary" @click="handleDelete(scope.row)" icon="Delete">삭제</el-button>
+                <el-button link type="primary" @click="handleUpdate(scope.row)" icon="Edit">수정</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -137,19 +137,19 @@
           <el-form ref="itemFormRef" :model="form" :rules="rules" label-width="108px">
             <el-row :gutter="24">
               <el-col :span="12">
-                <el-form-item label="商品名称" prop="itemName">
-                  <el-input v-model="form.itemName" placeholder="请输入名称"/>
+                <el-form-item label="상품명" prop="itemName">
+                  <el-input v-model="form.itemName" placeholder="이름을 입력해 주세요."/>
                 </el-form-item>
               </el-col>
               <el-col :span="10">
-                <el-form-item label="商品分类" prop="itemCategory">
+                <el-form-item label="상품 분류" prop="itemCategory">
                   <el-tree-select
                     ref="treeRef"
                     v-model="form.itemCategory"
                     :data="itemCategoryTreeSelectList"
                     :props="{ value: 'id', label: 'label', children: 'children' }"
                     value-key="id"
-                    placeholder="请选择分类"
+                    placeholder="분류를 선택해 주세요."
                     check-strictly
                     style="width: 100%!important;"
                   />
@@ -157,25 +157,25 @@
               </el-col>
               <el-col :span="1">
                 <el-button link icon="Plus" type="primary" style="height: 32px!important;line-height: 32px!important;"
-                           @click="handleAddType(true)">新增分类
+                           @click="handleAddType(true)">분류 추가
                 </el-button>
               </el-col>
             </el-row>
             <el-row :gutter="24">
               <el-col :span="12">
-                <el-form-item label="商品编号" prop="itemCode">
-                  <el-input v-model="form.itemCode" placeholder="请输入编号"/>
+                <el-form-item label="상품 코드" prop="itemCode">
+                  <el-input v-model="form.itemCode" placeholder="코드를 입력해 주세요."/>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="商品单位" prop="unit">
-                  <el-input v-model="form.unit" placeholder="请输入单位类别"/>
+                <el-form-item label="상품 단위" prop="unit">
+                  <el-input v-model="form.unit" placeholder="단위를 입력해 주세요."/>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row :gutter="24">
               <el-col :span="12">
-                <el-form-item label="商品品牌" prop="itemBrand">
+                <el-form-item label="상품 브랜드" prop="itemBrand">
                   <el-select v-model="form.itemBrand" clearable filterable style="width: 100%!important;">
                     <el-option
                       v-for="item in useWmsStore().itemBrandList"
@@ -192,85 +192,85 @@
         <el-card class="mt20">
           <template #header>
             <div class="card-header">
-              <span>规格</span>
+              <span>규격</span>
             </div>
           </template>
           <el-form :model="skuForm" :rules="skuRules" ref="skuFormRef" :show-message="false">
             <el-table :data="skuForm.itemSkuList" border cell-class-name="my-cell">
-              <el-table-column label="规格名称" prop="skuName">
+              <el-table-column label="규격명" prop="skuName">
                 <template #default="scope">
                   <el-form-item :prop="'itemSkuList.' + scope.$index + '.skuName'" :rules="skuRules.skuName"
                                 style="margin-bottom: 0!important;">
-                    <el-input v-model="scope.row.skuName" placeholder="请输入规格名称"/>
+                    <el-input v-model="scope.row.skuName" placeholder="규격명을 입력해 주세요."/>
                   </el-form-item>
                 </template>
               </el-table-column>
-              <el-table-column label="编号/条码" width="250">
+              <el-table-column label="코드 / 바코드" width="250">
                 <template #default="scope">
                   <div class="flex-center">
-                    <span class="mr5" style="width: 50px">编号</span>
+                    <span class="mr5" style="width: 50px">코드</span>
                     <el-input v-model="scope.row.skuCode" />
                   </div>
                   <div class="flex-center mt5">
-                    <span class="mr5" style="width: 50px">条码</span>
+                    <span class="mr5" style="width: 50px">바코드</span>
                     <el-input v-model="scope.row.barcode" />
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="长/宽/高(cm)" width="200">
+              <el-table-column label="길이 / 너비 / 높이(cm)" width="200">
                 <template #default="scope">
                   <div class="flex-center">
-                    <span class="mr5">长</span>
+                    <span class="mr5">길이</span>
                     <el-input-number :controls="false" :min="0" :precision="1" class="mr5" v-model="scope.row.length" />
                   </div>
                   <div class="flex-center mt5">
-                    <span class="mr5">宽</span>
+                    <span class="mr5">너비</span>
                     <el-input-number :controls="false" :min="0" :precision="1" class="mr5" v-model="scope.row.width" />
                   </div>
                   <div class="flex-center mt5">
-                    <span class="mr5">高</span>
+                    <span class="mr5">높이</span>
                     <el-input-number :controls="false" :min="0" :precision="1" v-model="scope.row.height" />
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="净重/毛重(kg)" width="240">
+              <el-table-column label="순중량 / 총중량(kg)" width="240">
                 <template #default="scope">
                   <div class="flex-center">
-                    <span class="mr5">净重</span>
+                    <span class="mr5">순중량</span>
                     <el-input-number :controls="false" :min="0" :precision="3" v-model="scope.row.netWeight"/>
                   </div>
                   <div class="flex-center mt5">
-                    <span class="mr5">毛重</span>
+                    <span class="mr5">총중량</span>
                     <el-input-number :controls="false" :min="0" :precision="3" v-model="scope.row.grossWeight"/>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="成本价/销售价(元)" width="240">
+              <el-table-column label="원가 / 판매가(위안)" width="240">
                 <template #default="scope">
                   <div class="flex-center">
-                    <span class="mr5">成本价</span>
+                    <span class="mr5">원가</span>
                     <el-input-number :controls="false" :min="0" :precision="2" v-model="scope.row.costPrice"/>
                   </div>
                   <div class="flex-center mt5">
-                    <span class="mr5">销售价</span>
+                    <span class="mr5">판매가</span>
                     <el-input-number :controls="false" :min="0" :precision="2" v-model="scope.row.sellingPrice"/>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" class-name="small-padding fixed-width" width="80" align="right">
+              <el-table-column label="작업" class-name="small-padding fixed-width" width="80" align="right">
                 <template #default="scope">
-                  <el-button link icon="Delete" type="primary" @click="handleDeleteItemSku(scope.row, scope.$index)">删除</el-button>
+                  <el-button link icon="Delete" type="primary" @click="handleDeleteItemSku(scope.row, scope.$index)">삭제</el-button>
                 </template>
               </el-table-column>
               <template #append v-if="skuForm.itemSkuList.length">
                 <div style="padding: 6px 2px 6px 2px;text-align: center;">
-                  <el-button text class="add-btn" icon="Plus" type="primary" @click="onAppendBtnClick">添加商品规格
+                  <el-button text class="add-btn" icon="Plus" type="primary" @click="onAppendBtnClick">상품 규격 추가
                   </el-button>
                 </div>
               </template>
               <template #empty>
                 <div style="padding: 2px 2px 6px 2px;text-align: center;width: 100%!important;">
-                  <el-button text class="add-btn" icon="Plus" type="primary" @click="onAppendBtnClick">添加商品规格
+                  <el-button text class="add-btn" icon="Plus" type="primary" @click="onAppendBtnClick">상품 규격 추가
                   </el-button>
                 </div>
               </template>
@@ -281,8 +281,8 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button :loading="buttonLoading" type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+          <el-button :loading="buttonLoading" type="primary" @click="submitForm">확인</el-button>
+          <el-button @click="cancel">취소</el-button>
         </div>
       </template>
     </el-drawer>
@@ -290,26 +290,26 @@
     <el-dialog :title="categoryDialog.title" v-model="categoryDialog.visible" width="500px" append-to-body
                :close-on-click-modal="false">
       <el-form ref="itemCategoryFormRef" :model="categoryForm" :rules="typeRules" label-width="128px" @submit.native.prevent>
-        <el-form-item label="上级分类" prop="parentId">
+        <el-form-item label="상위 분류" prop="parentId">
           <el-tree-select
             v-model="categoryForm.parentId"
             :data="itemCategoryTreeSelectList"
             :props="{ value: 'id', label: 'label', children: 'children' }"
             value-key="id"
-            placeholder="上级分类"
+            placeholder="상위 분류"
             check-strictly
             style="width: 100%!important;"
             clearable
           />
         </el-form-item>
-        <el-form-item label="商品分类名称" prop="categoryName">
-          <el-input v-model="categoryForm.categoryName" placeholder="请输入商品分类名称" @keyup.enter="submitCategoryForm"/>
+        <el-form-item label="상품 분류이름" prop="categoryName">
+          <el-input v-model="categoryForm.categoryName" placeholder="상품 분류명을 입력해 주세요." @keyup.enter="submitCategoryForm"/>
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button :loading="buttonLoading" type="primary" @click="submitCategoryForm">确 定</el-button>
-          <el-button @click="cancelType">取 消</el-button>
+          <el-button :loading="buttonLoading" type="primary" @click="submitCategoryForm">확인</el-button>
+          <el-button @click="cancelType">취소</el-button>
         </div>
       </template>
       <div id="qrcode"></div>
@@ -347,7 +347,7 @@ const itemCategoryTreeOptionsList = computed(() => {
   let data = [...itemCategoryTreeSelectList.value];
   data.unshift({
     id: -1,
-    label: '全部',
+    label: '전체',
     children: []
   });
   return data;
@@ -375,9 +375,9 @@ const append = (data) => {
 
 const remove = async (node, data) => {
   const ids = data.id
-  await proxy?.$modal.confirm('确认删除分类【' + data.label + '】吗？');
+  await proxy?.$modal.confirm('삭제 확인:분류【' + data.label + '】을(를) 삭제하시겠습니까?');
   await delItemCategory(ids);
-  proxy?.$modal.msgSuccess("删除成功");
+  proxy?.$modal.msgSuccess("삭제되었습니다.");
   useWmsStore().getItemCategoryList();
   useWmsStore().getItemCategoryTreeList();
 }
@@ -388,7 +388,7 @@ const edit = (node, data) => {
   categoryForm.value.id = data.id;
   // resetType();
   categoryForm.value.categoryName = data.label;
-  categoryDialog.title = "修改商品分类";
+  categoryDialog.title = "상품 분류 수정";
   categoryDialog.visible = true;
 }
 const dialog = reactive({
@@ -428,22 +428,22 @@ const data = reactive({
   },
   rules: {
     id: [
-      {required: true, message: "不能为空", trigger: "blur"}
+      {required: true, message: "항목은 필수입니다.", trigger: "blur"}
     ],
     itemName: [
-      {required: true, message: "名称不能为空", trigger: "blur"}
+      {required: true, message: "이름을 입력해 주세요.", trigger: "blur"}
     ],
     itemCategory: [
-      {required: true, message: "分类不能为空", trigger: "blur"}
+      {required: true, message: "분류를 선택해 주세요.", trigger: "blur"}
     ],
     warehouseId: [
-      {required: true, message: "所属仓库不能为空", trigger: "blur"}
+      {required: true, message: "창고를 선택해 주세요.", trigger: "blur"}
     ],
     quantity: [
-      {required: true, message: "安全库存不能为空", trigger: "blur"}
+      {required: true, message: "안전 재고를 입력해 주세요.", trigger: "blur"}
     ],
     remark: [
-      {required: true, message: "备注不能为空", trigger: "blur"}
+      {required: true, message: "비고를 입력해 주세요.", trigger: "blur"}
     ],
   }
 });
@@ -459,16 +459,16 @@ const categoryData = reactive({
   },
   rules: {
     id: [
-      {required: true, message: "商品分类id不能为空", trigger: "blur"}
+      {required: true, message: "상품 분류id항목은 필수입니다.", trigger: "blur"}
     ],
     // parentId: [
     //   {required: true, message: "父物料类型id不能为空", trigger: "blur"}
     // ],
     categoryName: [
-      {required: true, message: "商品分类名称不能为空", trigger: "blur"}
+      {required: true, message: "상품 분류명을 입력해 주세요.", trigger: "blur"}
     ],
     status: [
-      {required: true, message: "商品分类状态不能为空", trigger: "change"}
+      {required: true, message: "상품 분류 상태를 선택해 주세요.", trigger: "change"}
     ],
   }
 });
@@ -476,7 +476,7 @@ const {queryParams, form, rules} = toRefs(data);
 
 const {queryParams: typeQueryParams, form: categoryForm, rules: typeRules} = toRefs(categoryData);
 const currentType = ref()
-/** 查询物料列表 */
+/** 조회物料列表 */
 const getList = async () => {
   loading.value = true;
   const res = await listItemSkuPage(queryParams.value);
@@ -486,7 +486,7 @@ const getList = async () => {
   loading.value = false;
 }
 const handleAddType = (show) => {
-  categoryDialog.title = "新增商品分类";
+  categoryDialog.title = "상품 분류 추가";
   showParent.value = show
   categoryDialog.visible = true;
   if (show) {
@@ -501,7 +501,7 @@ const skuForm = reactive({
 })
 const skuFormRef = ref(ElForm)
 const skuRules = {
-  skuName: [{required: true, message: '规格名称不能为空', trigger: 'blur'}]
+  skuName: [{required: true, message: '규격명을 입력해 주세요.', trigger: 'blur'}]
 }
 // sku 管理
 const resetItemSkuList = () => {
@@ -534,20 +534,20 @@ const handleDeleteItemSku = async (row, index) => {
     return
   }
   if (skuForm.itemSkuList.length === 1) {
-    return proxy?.$modal.msgError("至少包含一个商品规格");
+    return proxy?.$modal.msgError("상품 규격을 하나 이상 등록해 주세요.");
   }
-  await proxy?.$modal.confirm('确认删除规格【' + row.skuName + '】吗？');
+  await proxy?.$modal.confirm('삭제 확인:규격【' + row.skuName + '】을(를) 삭제하시겠습니까?');
   loading.value = true;
   await delItemSku(row.id).finally(()=> loading.value = false);
-  proxy?.$modal.msgSuccess("删除成功");
+  proxy?.$modal.msgSuccess("삭제되었습니다.");
   const res = await getItem(row.itemId);
   skuForm.itemSkuList = res.data.sku
   form.value = res.data
 }
 const collapse = (draggingNode, dropNode, type) => {
   //注掉的是同级拖拽
-  if (draggingNode.data.label !== '全部' && draggingNode.level === dropNode.level && draggingNode.parent.id == dropNode.parent.id) {
-    if (dropNode.data.label === '全部') {
+  if (draggingNode.data.label !== '전체' && draggingNode.level === dropNode.level && draggingNode.parent.id == dropNode.parent.id) {
+    if (dropNode.data.label === '전체') {
       return type === 'next';
     } else {
       return type === 'prev' || type === 'next'
@@ -564,7 +564,7 @@ const handleNodeDrop = async (draggingNode, dropNode, dropType, ev) => {
     await updateOrderNum(dropNode.parent.data.children);
   }
 }
-/** 取消按钮 */
+/** 취소버튼 */
 const cancel = () => {
   reset();
   dialog.visible = false;
@@ -573,24 +573,24 @@ const cancelType = () => {
   resetType();
   categoryDialog.visible = false;
 }
-/** 表单重置 */
+/** 表单초기화 */
 const reset = () => {
   form.value = {...initFormData};
   itemFormRef.value.resetFields();
 }
 
-/** 表单重置 */
+/** 表单초기화 */
 const resetType = () => {
   categoryForm.value = {...initCategoryFormData};
   itemCategoryFormRef.value.resetFields();
 }
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 const handleQuery = () => {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 const resetQuery = () => {
   queryFormRef.value.resetFields();
   handleQuery();
@@ -603,21 +603,21 @@ const handleSelectionChange = (selection) => {
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
+/** 추가버튼작업 */
 const handleAdd = () => {
   resetItemSkuList()
   dialog.visible = true;
-  dialog.title = "新增商品";
+  dialog.title = "상품 추가";
   nextTick(async () => {
     reset();
   });
 }
-/** 修改按钮操作 */
+/** 수정버튼작업 */
 const handleUpdate = (row) => {
   resetItemSkuList()
   skuLoading.value = true
   dialog.visible = true;
-  dialog.title = "修改商品";
+  dialog.title = "상품 수정";
   nextTick(async () => {
     reset();
     const _id = row?.itemId || ids.value[0]
@@ -629,7 +629,7 @@ const handleUpdate = (row) => {
 }
 const handleQueryType = (node, data) => {
   queryParams.value.pageNum = 1
-  if (data.data.label === '全部') {
+  if (data.data.label === '전체') {
     queryParams.value.itemCategory = '';
     currentType.value = '';
     getList();
@@ -639,14 +639,14 @@ const handleQueryType = (node, data) => {
     getList();
   }
 }
-/** 提交按钮 */
+/** 저장버튼 */
 const submitForm = () => {
   form.value.sku = skuForm.itemSkuList
   itemFormRef.value.validate(async (valid) => {
     if (valid) {
       let flag = true
       if (!skuForm.itemSkuList || skuForm.itemSkuList.length === 0) {
-        proxy?.$modal.msgError("至少包含一个商品规格");
+        proxy?.$modal.msgError("상품 규격을 하나 이상 등록해 주세요.");
         flag = false
       }
       await skuFormRef.value.validate((valid2) => {
@@ -661,7 +661,7 @@ const submitForm = () => {
         } else {
           await addItem(form.value).finally(() => buttonLoading.value = false);
         }
-        proxy?.$modal.msgSuccess("修改成功");
+        proxy?.$modal.msgSuccess("수정되었습니다.");
         dialog.visible = false;
         await getList();
       }
@@ -677,30 +677,30 @@ const submitCategoryForm = () => {
       } else {
         await addItemCategory(categoryForm.value).finally(() => buttonLoading.value = false);
       }
-      proxy?.$modal.msgSuccess(categoryForm.value.id ? '修改成功' : '新增成功');
+      proxy?.$modal.msgSuccess(categoryForm.value.id ? '수정되었습니다.' : '등록되었습니다.');
       categoryDialog.visible = false;
       useWmsStore().getItemCategoryList();
       useWmsStore().getItemCategoryTreeList();
     }
   });
 }
-/** 删除按钮操作 */
+/** 삭제버튼작업 */
 const handleDelete = async (row) => {
   const _ids = row?.itemId || ids.value;
-  await proxy?.$modal.confirm('确认删除商品【' + row?.item.itemName + '】吗？');
+  await proxy?.$modal.confirm('삭제 확인:상품【' + row?.item.itemName + '】을(를) 삭제하시겠습니까?');
   loading.value = true;
   await delItem(_ids).finally(()=> loading.value = false);
-  proxy?.$modal.msgSuccess("删除成功");
+  proxy?.$modal.msgSuccess("삭제되었습니다.");
   await getList();
 }
 const treeRef = ref(null)
-/** 导出按钮操作 */
+/** 내보내기버튼작업 */
 const handleExport = () => {
   proxy?.download('wms/item/export', {
     ...queryParams.value
   }, `item_${new Date().getTime()}.xlsx`)
 }
-/** 下载条形码 */
+/** 다운로드바코드 */
 const downloadBarcode = (row) => {
   JSBarcode(barcode.value, row.barcode, {
     format: "CODE128",
@@ -714,7 +714,7 @@ const downloadBarcode = (row) => {
   a.href = canvas.toDataURL("image/png")
   a.click()
 }
-/** 下载二维码 */
+/** 다운로드二维码 */
 const downloadQrcode = async (row) => {
   qrcode.value = await Qrcode.toDataURL(row.barcode)
   //创建a标签
@@ -732,9 +732,9 @@ const getVolumeText = (itemSku) => {
   if((itemSku.length || itemSku.length === 0) && (itemSku.width || itemSku.width === 0) && (itemSku.height || itemSku.height === 0)) {
     return itemSku.length + ' * ' + itemSku.width + ' * ' + itemSku.height
   }
-  return ((itemSku.length || itemSku.length === 0) ? ('长：' + itemSku.length) : '')
-    + ((itemSku.width || itemSku.width === 0) ? (' 宽：' + itemSku.width) : '')
-    + ((itemSku.height || itemSku.height === 0) ? (' 高：' + itemSku.height) : '')
+  return ((itemSku.length || itemSku.length === 0) ? ('길이：' + itemSku.length) : '')
+    + ((itemSku.width || itemSku.width === 0) ? (' 너비：' + itemSku.width) : '')
+    + ((itemSku.height || itemSku.height === 0) ? (' 높이：' + itemSku.height) : '')
 }
 onMounted(() => {
   nextTick(()=>{

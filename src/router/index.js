@@ -16,10 +16,10 @@ import Layout from '@/layout'
  * roles: ['admin', 'common']       // 访问路由的角色权限
  * permissions: ['a:a:a', 'b:b:b']  // 访问路由的菜单权限
  * meta : {
-    noCache: true                   // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+    noCache: true                   // 如果设置: true，则不会被 <keep-alive> 캐시(기본 false)
     title: 'title'                  // 设置该路由在侧边栏和面包屑中展示的名字
-    icon: 'svg-name'                // 设置该路由的图标，对应路径src/assets/icons/svg
-    breadcrumb: false               // 如果设置为false，则不会在breadcrumb面包屑中显示
+    icon: 'svg-name'                // 设置该路由的아이콘，对应路径src/assets/icons/svg
+    breadcrumb: false               // 如果设置: false，则不会在breadcrumb面包屑中표시
     activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
   }
  */
@@ -66,7 +66,7 @@ export const constantRoutes = [
         path: '/index',
         component: () => import('@/views/dashboard/charts'),
         name: 'Index',
-        meta: { title: '首页', icon: 'redis', affix: true }
+        meta: { title: '홈', icon: 'redis', affix: true }
       }
     ]
   },
@@ -79,7 +79,7 @@ export const constantRoutes = [
         path: '/dashboard',
         component: () => import('@/views/dashboard/dashboard'),
         name: 'Dashboard',
-        meta: { title: '数据大屏', icon: 'dashboard', affix: true }
+        meta: { title: '종합 현황판', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -92,7 +92,7 @@ export const constantRoutes = [
         path: '/description',
         component: () => import('@/views/index'),
         name: 'Description',
-        meta: { title: '项目介绍', icon: 'button', affix: true }
+        meta: { title: '프로젝트 소개', icon: 'button', affix: true }
       }
     ]
   },
@@ -111,7 +111,7 @@ export const constantRoutes = [
         path: 'profile',
         component: () => import('@/views/system/user/profile/index'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
+        meta: { title: '내 정보', icon: 'user' }
       }
     ]
   }
@@ -129,7 +129,7 @@ export const dynamicRoutes = [
         path: 'role/:userId(\\d+)',
         component: () => import('@/views/system/user/authRole'),
         name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
+        meta: { title: '역할 할당', activeMenu: '/system/user' }
       }
     ]
   },
@@ -143,7 +143,7 @@ export const dynamicRoutes = [
         path: 'user/:roleId(\\d+)',
         component: () => import('@/views/system/role/authUser'),
         name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
+        meta: { title: '사용자 할당', activeMenu: '/system/role' }
       }
     ]
   },
@@ -157,7 +157,7 @@ export const dynamicRoutes = [
         path: 'index/:dictId(\\d+)',
         component: () => import('@/views/system/dict/data'),
         name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
+        meta: { title: '코드 항목', activeMenu: '/system/dict' }
       }
     ]
   },
@@ -171,7 +171,7 @@ export const dynamicRoutes = [
         path: 'index',
         component: () => import('@/views/system/oss/config'),
         name: 'OssConfig',
-        meta: { title: '配置管理', activeMenu: '/system/oss'}
+        meta: { title: '설정 관리', activeMenu: '/system/oss'}
       }
     ]
   },

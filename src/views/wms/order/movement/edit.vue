@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="receipt-order-edit-wrapper app-container" style="margin-bottom: 60px" v-loading="loading">
-      <el-card header="移库单基本信息">
+      <el-card header="이동 전표 기본 정보">
         <el-form label-width="108px" :model="form" ref="movementForm" :rules="rules">
           <el-row :gutter="24">
             <el-col :span="11">
-              <el-form-item label="移库单号" prop="orderNo">
-                <el-input class="w200" v-model="form.orderNo" placeholder="移库单号"
+              <el-form-item label="이동 전표 번호" prop="orderNo">
+                <el-input class="w200" v-model="form.orderNo" placeholder="이동 전표 번호"
                           :disabled="form.id"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="源仓库" prop="sourceWarehouseId">
-                <el-select v-model="form.sourceWarehouseId" placeholder="请选择源仓库" @change="handleChangeSourceWarehouse"
+              <el-form-item label="출발 창고" prop="sourceWarehouseId">
+                <el-select v-model="form.sourceWarehouseId" placeholder="출발 창고를 선택해 주세요." @change="handleChangeSourceWarehouse"
                            filterable>
                   <el-option v-for="item in useWmsStore().warehouseList" :key="item.id" :label="item.warehouseName"
                              :value="item.id"/>
@@ -20,8 +20,8 @@
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="目标仓库" prop="targetWarehouseId">
-                <el-select v-model="form.targetWarehouseId" placeholder="请选择目标仓库" @change="handleChangeTargetWarehouse"
+              <el-form-item label="도착 창고" prop="targetWarehouseId">
+                <el-select v-model="form.targetWarehouseId" placeholder="도착 창고를 선택해 주세요." @change="handleChangeTargetWarehouse"
                            filterable style="width: 100%">
                   <el-option v-for="item in useWmsStore().warehouseList" :key="item.id" :label="item.warehouseName"
                              :value="item.id"/>
@@ -31,10 +31,10 @@
           </el-row>
           <el-row :gutter="24">
             <el-col :span="11">
-              <el-form-item label="备注" prop="remark">
+              <el-form-item label="비고" prop="remark">
                 <el-input
                   v-model="form.remark"
-                  placeholder="备注...100个字符以内"
+                  placeholder="비고...100자 이내"
                   rows="4"
                   maxlength="100"
                   type="textarea"
@@ -45,15 +45,15 @@
 
             <el-col :span="6">
               <div style="display: flex;align-items: start">
-                <el-form-item label="总金额" prop="totalAmount">
+                <el-form-item label="총금액" prop="totalAmount">
                   <el-input-number style="width: 100%;" v-model="form.totalAmount" :precision="2" :min="0"></el-input-number>
                 </el-form-item>
-                <el-button link type="primary" @click="handleAutoCalc" style="line-height: 32px">自动计算
+                <el-button link type="primary" @click="handleAutoCalc" style="line-height: 32px">자동 계산
                 </el-button>
               </div>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="总数量" prop="totalQuantity" >
+              <el-form-item label="총수량" prop="totalQuantity" >
                 <el-input-number v-model="form.totalQuantity" :controls="false" :precision="0"
                                  :disabled="true" style="width: 100%"></el-input-number>
               </el-form-item>
@@ -61,11 +61,11 @@
           </el-row>
         </el-form>
       </el-card>
-      <el-card header="商品明细" class="mt10">
+      <el-card header="상품 상세" class="mt10">
         <div class="receipt-order-content">
           <div class="flex-space-between mb8">
             <div>
-              <span>审批 | 一物一码：</span>
+              <span>승인 | 개별 식별 코드：</span>
               <el-switch
                 :before-change="goSaasTip"
                 class="mr10 ml10"
@@ -74,69 +74,69 @@
                 v-model="mode"
                 :active-value="true"
                 :inactive-value="false"
-                active-text="开启"
-                inactive-text="关闭"
+                active-text="켜기"
+                inactive-text="닫기"
               />
             </div>
             <el-popover
               placement="left"
-              title="提示"
+              title="안내"
               :width="200"
               trigger="hover"
               :disabled="form.sourceWarehouseId && form.targetWarehouseId"
-              content="请先选择源仓库和目标仓库！"
+              content="출발 창고와 도착 창고를 먼저 선택해 주세요."
             >
               <template #reference>
                 <el-button type="primary" plain="plain" size="default" @click="showAddItem" icon="Plus"
-                           :disabled="!form.sourceWarehouseId || !form.targetWarehouseId">添加商品
+                           :disabled="!form.sourceWarehouseId || !form.targetWarehouseId">상품 추가
                 </el-button>
               </template>
             </el-popover>
           </div>
-          <el-table :data="form.details" border empty-text="暂无商品明细">
-            <el-table-column label="商品信息" prop="itemSku.itemName">
+          <el-table :data="form.details" border empty-text="등록된 상품 상세가 없습니다.">
+            <el-table-column label="상품 정보" prop="itemSku.itemName">
               <template #default="{ row }">
                 <div>{{
                     row.item.itemName + (row.item.itemCode ? ('(' + row.item.itemCode + ')') : '')
                   }}
                 </div>
                 <div v-if="row.item.itemBrand">
-                  品牌：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}
+                  브랜드：{{ useWmsStore().itemBrandMap.get(row.item.itemBrand).brandName }}
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="规格信息">
+            <el-table-column label="규격 정보">
               <template #default="{ row }">
                 <div>{{ row.itemSku.skuName}}</div>
-                <div v-if="row.itemSku.barcode">条码：{{ row.itemSku.barcode }}</div>
+                <div v-if="row.itemSku.barcode">바코드：{{ row.itemSku.barcode }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="移库数量" prop="quantity" width="180" align="center">
+            <el-table-column label="이동 수량" prop="quantity" width="180" align="center">
               <template #default="scope">
                 <el-input-number
                   v-model="scope.row.quantity"
-                  placeholder="移库数量"
+                  placeholder="이동 수량"
                   :min="1"
                   :precision="0"
                   @change="handleChangeQuantity"
                 ></el-input-number>
               </template>
             </el-table-column>
-            <el-table-column label="金额" prop="amount" width="180" align="center">
+            <el-table-column label="금액" prop="amount" width="180" align="center">
               <template #default="scope">
                 <el-input-number
                   v-model="scope.row.amount"
-                  placeholder="金额"
+                  placeholder="금액"
                   :precision="2"
                   :min="0"
                   :max="2147483647"
                 ></el-input-number>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="100" align="right" fixed="right">
+            <el-table-column label="작업" width="100" align="right" fixed="right">
               <template #default="scope">
                 <el-button icon="Delete" type="danger" plain size="small"
-                           @click="handleDeleteDetail(scope.row, scope.$index)" link>删除
+                           @click="handleDeleteDetail(scope.row, scope.$index)" link>삭제
                 </el-button>
               </template>
             </el-table-column>
@@ -157,12 +157,12 @@
     <div class="footer-global">
       <div class="btn-box">
         <div>
-          <el-button @click="doMovement" type="primary" class="ml10">完成移库</el-button>
-          <el-button @click="updateToInvalid" type="danger" v-if="form.id">作废</el-button>
+          <el-button @click="doMovement" type="primary" class="ml10">이동 확정</el-button>
+          <el-button @click="updateToInvalid" type="danger" v-if="form.id">무효 처리</el-button>
         </div>
         <div>
-          <el-button @click="save" type="primary">暂存</el-button>
-          <el-button @click="cancel" class="mr10">取消</el-button>
+          <el-button @click="save" type="primary">임시 저장</el-button>
+          <el-button @click="cancel" class="mr10">취소</el-button>
         </div>
       </div>
     </div>
@@ -201,19 +201,19 @@ const data = reactive({
   form: {...initFormData},
   rules: {
     orderNo: [
-      {required: true, message: "出库单号不能为空", trigger: "blur"}
+      {required: true, message: "출고 전표 번호를 입력해 주세요.", trigger: "blur"}
     ],
     sourceWarehouseId: [
-      {required: true, message: "请选择源仓库", trigger: ['blur', 'change']}
+      {required: true, message: "출발 창고를 선택해 주세요.", trigger: ['blur', 'change']}
     ],
     targetWarehouseId: [
-      {required: true, message: "请选择目标仓库", trigger: ['blur', 'change']}
+      {required: true, message: "도착 창고를 선택해 주세요.", trigger: ['blur', 'change']}
     ],
   }
 });
 const {form, rules} = toRefs(data);
 const cancel = async () => {
-  await proxy?.$modal.confirm('确认取消编辑移库单吗？');
+  await proxy?.$modal.confirm('이동 전표 편집을 취소하시겠습니까?');
   close()
 }
 const close = () => {
@@ -264,7 +264,7 @@ const handleAutoCalc = () => {
 }
 
 const save = async () => {
-  await proxy?.$modal.confirm('确认暂存移库单吗？');
+  await proxy?.$modal.confirm('이동 전표를 임시 저장하시겠습니까?');
   doSave()
 }
 const getParams = (orderStatus) => {
@@ -299,7 +299,7 @@ const doSave = (orderStatus = 0) => {
   movementForm.value?.validate((valid) => {
     // 校验
     if (!valid) {
-      return ElMessage.error('请填写必填项')
+      return ElMessage.error('필수 항목을 입력해 주세요.')
     }
 
     const params = getParams(orderStatus)
@@ -331,18 +331,18 @@ const doSave = (orderStatus = 0) => {
 }
 
 const doMovement = async () => {
-  await proxy?.$modal.confirm('确认移库吗？');
+  await proxy?.$modal.confirm('재고 이동을 확정하시겠습니까?');
   movementForm.value?.validate((valid) => {
     // 校验
     if (!valid) {
-      return ElMessage.error('请填写必填项')
+      return ElMessage.error('필수 항목을 입력해 주세요.')
     }
     if (!form.value.details?.length) {
-      return ElMessage.error('请选择商品')
+      return ElMessage.error('상품을 선택해 주세요.')
     }
     const invalidQuantityList = form.value.details.filter(it => !it.quantity)
     if (invalidQuantityList?.length) {
-      return ElMessage.error('请选择移库数量')
+      return ElMessage.error('이동 수량을 선택해 주세요.')
     }
 
     //('提交前校验',form.value)
@@ -350,7 +350,7 @@ const doMovement = async () => {
     loading.value = true
     movement(params).then((res) => {
       if (res.code === 200) {
-        ElMessage.success('移库成功')
+        ElMessage.success('재고 이동이 완료되었습니다.')
         close()
       } else {
         ElMessage.error(res.msg)
@@ -362,7 +362,7 @@ const doMovement = async () => {
 }
 
 const updateToInvalid = async () => {
-  await proxy?.$modal.confirm('确认作废移库单吗？');
+  await proxy?.$modal.confirm('이동 전표를 무효 처리하시겠습니까?');
   doSave(-1)
 }
 
@@ -424,12 +424,12 @@ const handleChangeQuantity = () => {
 
 const handleDeleteDetail = (row, index) => {
   if (row.id) {
-    proxy.$modal.confirm('确认删除本条商品明细吗？如确认会立即执行！').then(function () {
+    proxy.$modal.confirm('이 상품 상세를 삭제하시겠습니까? 확인하면 즉시 삭제됩니다.').then(function () {
       loading.value = true
       return delMovementOrderDetail(row.id);
     }).then(() => {
       form.value.details.splice(index, 1)
-      proxy.$modal.msgSuccess("删除成功");
+      proxy.$modal.msgSuccess("삭제되었습니다.");
     }).finally(() => {
       loading.value = false
     })
@@ -440,8 +440,8 @@ const handleDeleteDetail = (row, index) => {
   selectedInventory.value.splice(indexOfSelected, 1)
 }
 const goSaasTip = () => {
-  ElMessageBox.alert('如需体验，请在公众号内回复：saas', '请去Saas版本体验', {
-    confirmButtonText: '确定'
+  ElMessageBox.alert('이 기능은 원본 프로젝트의 SaaS 버전에서 제공됩니다.', 'SaaS 기능 안내', {
+    confirmButtonText: '확인'
   })
   return false
 }

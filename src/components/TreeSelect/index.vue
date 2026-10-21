@@ -33,18 +33,18 @@
 const { proxy } = getCurrentInstance();
 
 const props = defineProps({
-  /* 配置项 */
+  /* 설정项 */
   objMap: {
     type: Object,
     default: () => {
       return {
         value: 'id', // ID字段名
-        label: 'label', // 显示名称
+        label: 'label', // 표시이름
         children: 'children' // 子级字段名
       }
     }
   },
-  /* 自动收起 */
+  /* 自动접기 */
   accordion: {
     type: Boolean,
     default: () => {
@@ -86,8 +86,8 @@ function initHandle() {
       const node = proxy.$refs.selectTree.getNode(selectedValue)
       if (node) {
         valueTitle.value = node.data[props.objMap.label]
-        proxy.$refs.selectTree.setCurrentKey(selectedValue) // 设置默认选中
-        defaultExpandedKey.value = [selectedValue] // 设置默认展开
+        proxy.$refs.selectTree.setCurrentKey(selectedValue) // 设置기본选中
+        defaultExpandedKey.value = [selectedValue] // 设置기본展开
       }
     } else {
       clearHandle()

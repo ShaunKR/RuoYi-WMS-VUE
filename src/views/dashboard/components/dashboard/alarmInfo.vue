@@ -27,9 +27,9 @@ function getAlarmList(){
       "id": "1840213663235485697",
       "paramName": "1",
       "alarmTime": "2024-09-29 10:15:00",
-      "alarmInfo": "小米鼠标库存预警",
+      "alarmInfo": "샤오미 마우스 재고 경고",
       "alarmLevel": "0",
-      "area": "吴江仓\t",
+      "area": "우장 창고\t",
       "equipment": "Z2QB379B5N",
       "alarmVal": "19.90",
       "count": null,
@@ -41,9 +41,9 @@ function getAlarmList(){
       "id": "1840213663235485697",
       "paramName": "1",
       "alarmTime": "2024-09-29 10:15:00",
-      "alarmInfo": "树山梨到期预警",
+      "alarmInfo": "수산 배 유효기간 경고",
       "alarmLevel": "0",
-      "area": "常熟仓\t",
+      "area": "창수 창고\t",
       "equipment": "Z2QB379B5N",
       "alarmVal": "19.90",
       "count": null,
@@ -55,9 +55,9 @@ function getAlarmList(){
       "id": "1840213663235485697",
       "paramName": "1",
       "alarmTime": "2024-09-29 10:15:00",
-      "alarmInfo": "监控设备离线",
+      "alarmInfo": "모니터링 장비 연결 끊김",
       "alarmLevel": "0",
-      "area": "盛泽仓\t",
+      "area": "성쩌 창고\t",
       "equipment": "Z2QB379B5N",
       "alarmVal": "19.90",
       "count": null,
@@ -69,9 +69,9 @@ function getAlarmList(){
       "id": "1840213663235485697",
       "paramName": "1",
       "alarmTime": "2024-09-29 10:15:00",
-      "alarmInfo": "监控设备离线",
+      "alarmInfo": "모니터링 장비 연결 끊김",
       "alarmLevel": "0",
-      "area": "园区仓\t",
+      "area": "산업단지 창고\t",
       "equipment": "Z2QB379B5N",
       "alarmVal": "19.90",
       "count": null,
@@ -83,9 +83,9 @@ function getAlarmList(){
       "id": "1840213663235485697",
       "paramName": "1",
       "alarmTime": "2024-09-29 10:15:00",
-      "alarmInfo": "115库位温度过高",
+      "alarmInfo": "115보관 위치 온도 초과",
       "alarmLevel": "0",
-      "area": "盛泽仓\t",
+      "area": "성쩌 창고\t",
       "equipment": "Z2QB379B5N",
       "alarmVal": "19.90",
       "count": null,
@@ -111,11 +111,11 @@ function changeAlarmBg(level) {
 function getLevel(level) {
   switch (level) {
     case '0':
-      return '一般'
+      return '일반'
     case '1':
-      return '紧急'
+      return '긴급'
     case '2':
-      return '严重'
+      return '심각'
     default:
       break;
   }

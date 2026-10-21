@@ -1,3 +1,4 @@
+import { koreanLabel } from '@/locales/ko'
 import auth from '@/plugins/auth'
 import router, { constantRoutes, dynamicRoutes } from '@/router'
 import { getRouters } from '@/api/menu'
@@ -58,6 +59,7 @@ const usePermissionStore = defineStore(
 // 遍历后台传来的路由字符串，转换为组件对象
 function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
   return asyncRouterMap.filter(route => {
+    if (route.meta?.title) route.meta.title = koreanLabel(route.meta.title)
     if (type && route.children) {
       route.children = filterChildren(route.children)
     }

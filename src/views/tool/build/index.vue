@@ -1,3 +1,3 @@
 <template>
-   <div> 表单构建(由于此功能的开源组件不支持 VUE3+TS 故暂时无法使用) <svg-icon icon-class="build" /> </div>
+   <div> 폼 빌더(원본 라이브러리가 Vue 3 + TypeScript를 지원하지 않아 현재 사용할 수 없습니다.) <svg-icon icon-class="build" /> </div>
 </template>

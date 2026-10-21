@@ -21,19 +21,19 @@
     </el-upload>
     <!-- 上传提示 -->
     <div class="el-upload__tip" v-if="showTip">
-      请上传
+      업로드해 주세요:
       <template v-if="fileSize">
-        大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b>
+        최대 크기: <b style="color: #f56c6c">{{ fileSize }}MB</b>
       </template>
       <template v-if="fileType">
-        格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b>
+        지원 형식: <b style="color: #f56c6c">{{ fileType.join("/") }}</b>
       </template>
-      的文件
+      파일
     </div>
 
     <el-dialog
       v-model="dialogVisible"
-      title="预览"
+      title="미리보기"
       width="800px"
       append-to-body
     >
@@ -80,7 +80,7 @@ const uploadList = ref([]);
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 const baseUrl = import.meta.env.VITE_APP_BASE_API;
-const uploadImgUrl = ref(baseUrl + "/system/oss/upload"); // 上传的图片服务器地址
+const uploadImgUrl = ref(baseUrl + "/system/oss/upload"); // 업로드的이미지服务器주소
 const headers = ref({ Authorization: "Bearer " + getToken() });
 const fileList = ref([]);
 const showTip = computed(
@@ -133,24 +133,24 @@ function handleBeforeUpload(file) {
   }
   if (!isImg) {
     proxy.$modal.msgError(
-      `文件格式不正确, 请上传${props.fileType.join("/")}图片格式文件!`
+      `지원하지 않는 파일 형식입니다., 업로드해 주세요:${props.fileType.join("/")}이미지형식 파일!`
     );
     return false;
   }
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize;
     if (!isLt) {
-      proxy.$modal.msgError(`上传头像图片大小不能超过 ${props.fileSize} MB!`);
+      proxy.$modal.msgError(`프로필 이미지 크기는 다음 용량 이하여야 합니다: ${props.fileSize} MB!`);
       return false;
     }
   }
-  proxy.$modal.loading("正在上传图片，请稍候...");
+  proxy.$modal.loading("이미지 업로드 중입니다....");
   number.value++;
 }
 
 // 文件个数超出
 function handleExceed() {
-  proxy.$modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`);
+  proxy.$modal.msgError(`업로드 가능한 파일 수를 초과했습니다: ${props.limit} 개!`);
 }
 
 // 上传成功回调
@@ -192,7 +192,7 @@ function uploadedSuccessfully() {
 
 // 上传失败
 function handleUploadError(res) {
-  proxy.$modal.msgError("上传图片失败");
+  proxy.$modal.msgError("이미지 업로드에 실패했습니다.");
   proxy.$modal.closeLoading();
 }
 

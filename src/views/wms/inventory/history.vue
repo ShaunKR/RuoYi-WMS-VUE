@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-card>
       <el-form :model="queryParams" ref="queryRef" :inline="true" label-width="68px">
-        <el-form-item label="订单类型" prop="orderType">
+        <el-form-item label="전표 유형" prop="orderType">
           <el-radio-group v-model="queryParams.orderType" @change="handleQuery">
             <el-radio-button
               :key="-1"
               :label="-1"
             >
-              全部
+              전체
             </el-radio-button>
             <el-radio-button
               v-for="item in wms_inventory_history_type"
@@ -19,77 +19,77 @@
             </el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="仓库" prop="warehouseId">
-          <el-select style="width: 100%" v-model="queryParams.warehouseId" placeholder="请选择仓库"
+        <el-form-item label="창고" prop="warehouseId">
+          <el-select style="width: 100%" v-model="queryParams.warehouseId" placeholder="창고를 선택해 주세요."
                      filterable clearable>
             <el-option v-for="item in useWmsStore().warehouseList" :key="item.id" :label="item.warehouseName"
                        :value="item.id"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="操作单号" prop="orderNo">
-          <el-input v-model="queryParams.orderNo" clearable placeholder="请输入操作单号"></el-input>
+        <el-form-item label="처리 전표 번호" prop="orderNo">
+          <el-input v-model="queryParams.orderNo" clearable placeholder="처리 전표 번호를 입력해 주세요."></el-input>
         </el-form-item>
 
-        <el-form-item label="商品名称" prop="itemName">
-          <el-input v-model="queryParams.itemName" clearable placeholder="请输入商品名称"></el-input>
+        <el-form-item label="상품명" prop="itemName">
+          <el-input v-model="queryParams.itemName" clearable placeholder="상품명을 입력해 주세요."></el-input>
         </el-form-item>
-        <el-form-item label="商品编号" prop="itemCode">
-          <el-input v-model="queryParams.itemCode" clearable placeholder="请输入商品编号"></el-input>
+        <el-form-item label="상품 코드" prop="itemCode">
+          <el-input v-model="queryParams.itemCode" clearable placeholder="상품 코드를 입력해 주세요."></el-input>
         </el-form-item>
-        <el-form-item label="规格名称" prop="skuName">
-          <el-input v-model="queryParams.skuName" clearable placeholder="请输入规格名称"></el-input>
+        <el-form-item label="규격명" prop="skuName">
+          <el-input v-model="queryParams.skuName" clearable placeholder="규격명을 입력해 주세요."></el-input>
         </el-form-item>
-        <el-form-item label="规格编号" prop="skuCode">
-          <el-input v-model="queryParams.skuCode" clearable placeholder="请输入规格编号"></el-input>
+        <el-form-item label="규격 코드" prop="skuCode">
+          <el-input v-model="queryParams.skuCode" clearable placeholder="규격 코드를 입력해 주세요."></el-input>
         </el-form-item>
-        <el-form-item label="操作时间" prop="createTimeRange">
+        <el-form-item label="처리 일시" prop="createTimeRange">
           <el-date-picker
             v-model="queryParams.createTimeRange"
             type="datetimerange"
-            range-separator="至"
+            range-separator="~"
             value-format="YYYY-MM-DD HH:mm:ss"
             format="YYYY-MM-DD HH:mm:ss"
             :default-time="defaultTime"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
+            start-placeholder="시작 일시"
+            end-placeholder="종료 일시"
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-          <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+          <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+          <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
         </el-form-item>
       </el-form>
     </el-card>
 
     <el-card class="mt20">
       <el-row :gutter="10" class="mb8" type="flex" justify="space-between">
-        <el-col :span="6"><span style="font-size: large">库存记录</span></el-col>
+        <el-col :span="6"><span style="font-size: large">재고 이력</span></el-col>
       </el-row>
-      <el-table v-loading="loading" :data="inventoryHistoryList" border class="mt20" empty-text="暂无库存记录" cell-class-name="vertical-top-cell">
-        <el-table-column label="操作单号" prop="orderNo"/>
-        <el-table-column label="商品信息">
+      <el-table v-loading="loading" :data="inventoryHistoryList" border class="mt20" empty-text="재고 이력이 없습니다." cell-class-name="vertical-top-cell">
+        <el-table-column label="처리 전표 번호" prop="orderNo"/>
+        <el-table-column label="상품 정보">
           <template #default="{ row }">
             <div>{{ row.item.itemName }}</div>
-            <div v-if="row.item.itemCode">商品编号：{{ row.item.itemCode }}</div>
+            <div v-if="row.item.itemCode">상품 코드：{{ row.item.itemCode }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="规格信息">
+        <el-table-column label="규격 정보">
           <template #default="{ row }">
             <div>{{ row.itemSku.skuName }}</div>
-            <div v-if="row.itemSku.skuCode">规格编号：{{ row.itemSku.skuCode }}</div>
+            <div v-if="row.itemSku.skuCode">규격 코드：{{ row.itemSku.skuCode }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="订单类型" align="center" width="100">
+        <el-table-column label="전표 유형" align="center" width="100">
           <template #default="{ row }">
             <dict-tag :options="wms_inventory_history_type" :value="row.orderType"/>
           </template>
         </el-table-column>
-        <el-table-column label="仓库">
+        <el-table-column label="창고">
           <template #default="{ row }">
             <div>{{ useWmsStore().warehouseMap.get(row.warehouseId)?.warehouseName }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="操作前" align="right">
+        <el-table-column label="변경 전" align="right">
           <template #default="{ row }">
             <div >
               <el-statistic :value="Number(row.beforeQuantity)" :precision="0" v-if="row.beforeQuantity"/>
@@ -97,7 +97,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作后" align="right">
+        <el-table-column label="변경 후" align="right">
           <template #default="{ row }">
             <div>
               <el-statistic :value="Number(row.afterQuantity)" :precision="0" v-if="row.afterQuantity"/>
@@ -105,19 +105,19 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="数量/金额(元)">
+        <el-table-column label="수량 / 금액(위안)">
           <template #default="{ row }">
             <div class="flex-space-between">
-              <div>数量：</div>
+              <div>수량：</div>
               <el-statistic :value="Number(row.quantity)" :precision="0"/>
             </div>
             <div class="flex-space-between" v-if="row.amount || row.amount === 0">
-              <div>金额：</div>
+              <div>금액：</div>
               <el-statistic :value="Number(row.amount)" :precision="2"/>
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作时间" prop="createTime"/>
+        <el-table-column label="처리 일시" prop="createTime"/>
       </el-table>
 
       <el-row>
@@ -158,7 +158,7 @@ const queryParams = ref({
   warehouseId: undefined,
 })
 
-/** 查询往来单位列表 */
+/** 조회거래처列表 */
 function getList() {
   const query = {...queryParams.value}
   if (query.orderType === -1) {
@@ -176,13 +176,13 @@ function getList() {
   });
 }
 
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();

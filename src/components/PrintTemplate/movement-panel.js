@@ -14,17 +14,17 @@ export default {
             "top": 35,
             "height": 40,
             "width": 160,
-            "title": "条形码",
+            "title": "바코드",
             "barcodeType": "code128",
             "testData": "barcode",
             "textType": "barcode",
             "fields": [
               {
-                "text": "移库单号",
+                "text": "이동 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               }
             ],
@@ -33,7 +33,7 @@ export default {
             "widthHeightSync": false
           },
           "printElementType": {
-            "title": "条形码",
+            "title": "바코드",
             "type": "barcode"
           }
         },
@@ -45,39 +45,39 @@ export default {
             "width": 350,
             "fields": [
               {
-                "text": "移库单号",
+                "text": "이동 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               },
               {
-                "text": "仓库",
+                "text": "창고",
                 "field": "warehouse"
               }
             ],
-            "title": "移库单",
+            "title": "이동 전표",
             "field": "orderNo",
             "coordinateSync": false,
             "widthHeightSync": false,
@@ -87,7 +87,7 @@ export default {
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -99,35 +99,35 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "移库状态",
+            "title": "이동 상태",
             "field": "orderStatus",
             "coordinateSync": false,
             "widthHeightSync": false,
@@ -138,7 +138,7 @@ export default {
             "hCenter": 103.125
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -150,42 +150,42 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "总数量",
+            "title": "총수량",
             "field": "totalQuantity",
             "coordinateSync": false,
             "widthHeightSync": false,
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -197,42 +197,42 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "源仓库",
+            "title": "출발 창고",
             "field": "sourceWarehouseName",
             "coordinateSync": false,
             "widthHeightSync": false,
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -244,42 +244,42 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "目标仓库",
+            "title": "도착 창고",
             "field": "targetWarehouseName",
             "coordinateSync": false,
             "widthHeightSync": false,
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -291,42 +291,42 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "创建人",
+            "title": "등록자",
             "field": "createBy",
             "coordinateSync": false,
             "widthHeightSync": false,
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -338,35 +338,35 @@ export default {
             "width": 150,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "创建时间",
+            "title": "등록 일시",
             "field": "createTime",
             "coordinateSync": false,
             "widthHeightSync": false,
@@ -377,7 +377,7 @@ export default {
             "hCenter": 126.375
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -389,42 +389,42 @@ export default {
             "width": 200,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "操作人",
+            "title": "처리자",
             "field": "updateBy",
             "coordinateSync": false,
             "widthHeightSync": false,
             "qrCodeLevel": 0
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -436,35 +436,35 @@ export default {
             "width": 150,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "操作时间",
+            "title": "처리 일시",
             "field": "updateTime",
             "coordinateSync": false,
             "widthHeightSync": false,
@@ -475,7 +475,7 @@ export default {
             "hCenter": 126.375
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         },
@@ -491,7 +491,7 @@ export default {
               [
                 {
                   "width": 78.57142857142857,
-                  "title": "商品名称",
+                  "title": "상품명",
                   "field": "itemName",
                   "checked": true,
                   "columnId": "itemName",
@@ -501,7 +501,7 @@ export default {
                 },
                 {
                   "width": 78.57142857142857,
-                  "title": "规格名称",
+                  "title": "규격명",
                   "field": "skuName",
                   "checked": true,
                   "columnId": "skuName",
@@ -512,7 +512,7 @@ export default {
                 {
                   "width": 78.57142857142857,
                   "align": "right",
-                  "title": "数量",
+                  "title": "수량",
                   "field": "quantity",
                   "checked": true,
                   "columnId": "quantity",
@@ -527,7 +527,7 @@ export default {
             ]
           },
           "printElementType": {
-            "title": "表格",
+            "title": "표",
             "type": "table",
             "editable": true,
             "columnDisplayEditable": true,
@@ -552,35 +552,35 @@ export default {
             "width": 500,
             "fields": [
               {
-                "text": "入库单号",
+                "text": "입고 전표 번호",
                 "field": "orderNo"
               },
               {
-                "text": "客户",
+                "text": "고객",
                 "field": "merchantName"
               },
               {
-                "text": "订单号",
+                "text": "주문 번호",
                 "field": "orderNo"
               },
               {
-                "text": "移库类型",
+                "text": "이동 유형",
                 "field": "optType"
               },
               {
-                "text": "移库状态",
+                "text": "이동 상태",
                 "field": "orderStatus"
               },
               {
-                "text": "创建日期",
+                "text": "등록일",
                 "field": "createTime"
               },
               {
-                "text": "备注",
+                "text": "비고",
                 "field": "remark"
               }
             ],
-            "title": "备注",
+            "title": "비고",
             "field": "remark",
             "coordinateSync": false,
             "widthHeightSync": false,
@@ -591,7 +591,7 @@ export default {
             "hCenter": 228.375
           },
           "printElementType": {
-            "title": "文本",
+            "title": "텍스트",
             "type": "text"
           }
         }

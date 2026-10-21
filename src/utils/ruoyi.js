@@ -37,7 +37,7 @@ export function parseTime(time, pattern) {
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') { return ['일', '월', '화', '수', '목', '금', '토'][value] }
     if (result.length > 0 && value < 10) {
       value = '0' + value
     }
@@ -267,8 +267,8 @@ export function generateNo() {
   // 获取当前日期
   const now = new Date();
   // 获取月和日
-  const month = String(now.getMonth() + 1).padStart(2, '0'); // getMonth() 返回的是0-11，所以需要加1
-  const day = String(now.getDate()).padStart(2, '0'); // getDate() 返回的是1-31
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // getMonth() 돌아가기的是0-11，所以需要加1
+  const day = String(now.getDate()).padStart(2, '0'); // getDate() 돌아가기的是1-31
   // 生成 0 到 9999 之间的随机整数
   const randomNum = Math.floor(Math.random() * 10000);
   // 返回

@@ -24,13 +24,13 @@ const route = useRoute();
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 const sizeOptions = ref([
-  { label: "较大", value: "large" },
-  { label: "默认", value: "default" },
-  { label: "稍小", value: "small" },
+  { label: "크게", value: "large" },
+  { label: "기본", value: "default" },
+  { label: "작게", value: "small" },
 ]);
 
 function handleSetSize(size) {
-  proxy.$modal.loading("正在设置布局大小，请稍候...");
+  proxy.$modal.loading("화면 크기를 적용하고 있습니다....");
   appStore.setSize(size);
   setTimeout("window.location.reload()", 1000);
 }

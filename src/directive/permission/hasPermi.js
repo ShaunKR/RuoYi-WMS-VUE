@@ -22,7 +22,7 @@ export default {
         el.parentNode && el.parentNode.removeChild(el)
       }
     } else {
-      throw new Error(`请设置操作权限标签值`)
+      throw new Error(`작업 권한 값을 설정해 주세요.`)
     }
   }
 }

@@ -11,7 +11,7 @@ let downloadLoadingInstance;
 export default {
   oss(ossId) {
     var url = baseURL + '/system/oss/download/' + ossId
-    downloadLoadingInstance = ElLoading.service({ text: "正在下载数据，请稍候", background: "rgba(0, 0, 0, 0.7)", })
+    downloadLoadingInstance = ElLoading.service({ text: "다운로드 중입니다. 잠시 기다려 주세요.", background: "rgba(0, 0, 0, 0.7)", })
     axios({
       method: 'get',
       url: url,
@@ -28,13 +28,13 @@ export default {
       downloadLoadingInstance.close();
     }).catch((r) => {
       console.error(r)
-      Message.error('下载文件出现错误，请联系管理员！')
+      Message.error('파일을 다운로드하지 못했습니다. 관리자에게 문의해 주세요.')
       downloadLoadingInstance.close();
     })
   },
   zip(url, name) {
     var url = baseURL + url
-    downloadLoadingInstance = ElLoading.service({ text: "正在下载数据，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
+    downloadLoadingInstance = ElLoading.service({ text: "다운로드 중입니다. 잠시 기다려 주세요.", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
     axios({
       method: 'get',
       url: url,
@@ -54,7 +54,7 @@ export default {
       downloadLoadingInstance.close();
     }).catch((r) => {
       console.error(r)
-      ElMessage.error('下载文件出现错误，请联系管理员！')
+      ElMessage.error('파일을 다운로드하지 못했습니다. 관리자에게 문의해 주세요.')
       downloadLoadingInstance.close();
     })
   },

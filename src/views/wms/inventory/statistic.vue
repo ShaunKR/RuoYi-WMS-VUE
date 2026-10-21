@@ -2,83 +2,83 @@
   <div class="app-container">
     <el-card>
       <el-form :model="queryParams" ref="queryRef" label-width="90px" :inline="true">
-        <el-form-item class="col4" label="维度 " prop="itemId">
+        <el-form-item class="col4" label="집계 기준 " prop="itemId">
           <el-radio-group v-model="queryType" size="default" @change="handleSortTypeChange">
-            <el-radio-button label="warehouse">仓库</el-radio-button>
-            <el-radio-button label="item">商品</el-radio-button>
+            <el-radio-button label="warehouse">창고</el-radio-button>
+            <el-radio-button label="item">상품</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item class="col4" label="仓库" prop="warehouseId">
-          <el-select style="width: 100%" v-model="queryParams.warehouseId" placeholder="请选择仓库"
+        <el-form-item class="col4" label="창고" prop="warehouseId">
+          <el-select style="width: 100%" v-model="queryParams.warehouseId" placeholder="창고를 선택해 주세요."
                      filterable clearable>
             <el-option v-for="item in useWmsStore().warehouseList" :key="item.id" :label="item.warehouseName"
                        :value="item.id"/>
           </el-select>
         </el-form-item>
-        <el-form-item class="col4" label="商品名称" prop="itemName">
-          <el-input v-model="queryParams.itemName" clearable placeholder="商品名称"></el-input>
+        <el-form-item class="col4" label="상품명" prop="itemName">
+          <el-input v-model="queryParams.itemName" clearable placeholder="상품명"></el-input>
         </el-form-item>
-        <el-form-item class="col4" label="商品编号" prop="itemCode">
-          <el-input v-model="queryParams.itemCode" clearable placeholder="商品编号"></el-input>
+        <el-form-item class="col4" label="상품 코드" prop="itemCode">
+          <el-input v-model="queryParams.itemCode" clearable placeholder="상품 코드"></el-input>
         </el-form-item>
-        <el-form-item class="col4" label="规格名称" prop="skuName">
-          <el-input v-model="queryParams.skuName" clearable placeholder="规格名称"></el-input>
+        <el-form-item class="col4" label="규격명" prop="skuName">
+          <el-input v-model="queryParams.skuName" clearable placeholder="규격명"></el-input>
         </el-form-item>
-        <el-form-item class="col4" label="规格编号" prop="skuCode">
-          <el-input v-model="queryParams.skuCode" clearable placeholder="规格编号"></el-input>
+        <el-form-item class="col4" label="규격 코드" prop="skuCode">
+          <el-input v-model="queryParams.skuCode" clearable placeholder="규격 코드"></el-input>
         </el-form-item>
         <el-form-item class="col4" style="margin-left: 32px">
-          <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-          <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+          <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+          <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card class="mt20">
       <div class="mb8 flex-space-between">
-        <div style="font-size: large">库存统计</div>
-        <el-checkbox v-model="filterable" label="过滤掉库存为0的商品" size="large" @change="handleChangeFilterZero"/>
+        <div style="font-size: large">재고 통계</div>
+        <el-checkbox v-model="filterable" label="재고 0인 상품 숨기기" size="large" @change="handleChangeFilterZero"/>
       </div>
       <el-table :data="inventoryList" border :span-method="spanMethod"
-                cell-class-name="vertical-top-cell" v-loading="loading" empty-text="暂无库存">
+                cell-class-name="vertical-top-cell" v-loading="loading" empty-text="재고가 없습니다.">
         <template v-if="queryType == 'warehouse'">
-          <el-table-column label="仓库" prop="warehouseId">
+          <el-table-column label="창고" prop="warehouseId">
             <template #default="{ row }">
               <div>{{ useWmsStore().warehouseMap.get(row.warehouseId)?.warehouseName }}</div>
             </template>
           </el-table-column>
-          <el-table-column label="商品信息" prop="warehouseIdAndItemId">
+          <el-table-column label="상품 정보" prop="warehouseIdAndItemId">
             <template #default="{ row }">
               <div>{{ row.item.itemName }}</div>
-              <div v-if="row.item.itemCode">商品编号：{{ row.item.itemCode }}</div>
+              <div v-if="row.item.itemCode">상품 코드：{{ row.item.itemCode }}</div>
             </template>
           </el-table-column>
-          <el-table-column label="规格信息" :prop="skuId">
+          <el-table-column label="규격 정보" :prop="skuId">
             <template #default="{ row }">
               <div>{{ row.itemSku.skuName }}</div>
-              <div v-if="row.itemSku.skuCode">规格编号：{{ row.itemSku.skuCode }}</div>
+              <div v-if="row.itemSku.skuCode">규격 코드：{{ row.itemSku.skuCode }}</div>
             </template>
           </el-table-column>
         </template>
         <template v-else>
-          <el-table-column label="商品信息" prop="itemId">
+          <el-table-column label="상품 정보" prop="itemId">
             <template #default="{ row }">
               <div>{{ row.item.itemName }}</div>
-              <div v-if="row.item.itemCode">商品编号：{{ row.item.itemCode }}</div>
+              <div v-if="row.item.itemCode">상품 코드：{{ row.item.itemCode }}</div>
             </template>
           </el-table-column>
-          <el-table-column label="规格信息" prop="skuId">
+          <el-table-column label="규격 정보" prop="skuId">
             <template #default="{ row }">
               <div>{{ row.itemSku.skuName }}</div>
-              <div v-if="row.itemSku.skuCode">规格编号：{{ row.itemSku.skuCode }}</div>
+              <div v-if="row.itemSku.skuCode">규격 코드：{{ row.itemSku.skuCode }}</div>
             </template>
           </el-table-column>
-          <el-table-column label="仓库" prop="skuIdAndWarehouseId">
+          <el-table-column label="창고" prop="skuIdAndWarehouseId">
             <template #default="{row}">
               <div>{{ useWmsStore().warehouseMap.get(row.warehouseId)?.warehouseName }}</div>
             </template>
           </el-table-column>
         </template>
-        <el-table-column label="库存" prop="quantity" align="right">
+        <el-table-column label="재고" prop="quantity" align="right">
           <template #default="{ row }">
             <el-statistic :value="Number(row.quantity)" :precision="0"/>
           </template>
@@ -129,7 +129,7 @@ const queryParams = ref({
   minQuantity: undefined
 })
 
-/** 查询库存列表 */
+/** 조회재고列表 */
 const getList = async () => {
   let query = {...queryParams.value}
   if (filterable.value) {
@@ -152,13 +152,13 @@ const getList = async () => {
   loading.value = false;
 }
 
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 const handleQuery = () => {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 const resetQuery = () => {
   proxy.resetForm("queryRef");
   handleQuery();

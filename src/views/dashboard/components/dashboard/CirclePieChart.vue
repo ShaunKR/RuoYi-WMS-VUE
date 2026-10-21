@@ -23,9 +23,9 @@ const props = defineProps({
     type: Array,
     default: function () {
       return [
-        { value: 0, name: "正常" },
-        { value: 0, name: "报警" },
-        { value: 0, name: "离线" },
+        { value: 0, name: "정상" },
+        { value: 0, name: "경고" },
+        { value: 0, name: "연결 끊김" },
       ];
     },
   },
@@ -84,7 +84,7 @@ function initChart() {
     },
     series: [
       {
-        name: "设备状态",
+        name: "장비 상태",
         type: "pie",
         radius: [0, '65%'],
         center: ["50%", "40%"],

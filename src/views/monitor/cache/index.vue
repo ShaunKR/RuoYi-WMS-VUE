@@ -3,38 +3,38 @@
     <el-row>
       <el-col :span="24" class="card-box">
         <el-card>
-          <template #header><Monitor style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">基本信息</span></template>
+          <template #header><Monitor style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">기본 정보</span></template>
           <div class="el-table el-table--enable-row-hover el-table--medium">
             <table cellspacing="0" style="width: 100%">
               <tbody>
                 <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">Redis版本</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">Redis 버전</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.redis_version }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">运行模式</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.redis_mode == "standalone" ? "单机" : "集群" }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">端口</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">운영 모드</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.redis_mode == "standalone" ? "단일 서버" : "클러스터" }}</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">포트</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.tcp_port }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">客户端数</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">연결 클라이언트 수</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.connected_clients }}</div></td>
                 </tr>
                 <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">运行时间(天)</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">가동 시간(일)</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.uptime_in_days }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">使用内存</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">메모리 사용량</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.used_memory_human }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">使用CPU</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">CPU 사용량</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ parseFloat(cache.info.used_cpu_user_children).toFixed(2) }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">内存配置</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">메모리 설정</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.maxmemory_human }}</div></td>
                 </tr>
                 <tr>
-                  <td class="el-table__cell is-leaf"><div class="cell">AOF是否开启</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.aof_enabled == "0" ? "否" : "是" }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">RDB是否成功</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">AOF 사용 여부</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.aof_enabled == "0" ? "아니요" : "예" }}</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">RDB 저장 성공 여부</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.rdb_last_bgsave_status }}</div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">Key数量</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">Key수량</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.dbSize">{{ cache.dbSize }} </div></td>
-                  <td class="el-table__cell is-leaf"><div class="cell">网络入口/出口</div></td>
+                  <td class="el-table__cell is-leaf"><div class="cell">네트워크 수신 / 송신</div></td>
                   <td class="el-table__cell is-leaf"><div class="cell" v-if="cache.info">{{ cache.info.instantaneous_input_kbps }}kps/{{cache.info.instantaneous_output_kbps}}kps</div></td>
                 </tr>
               </tbody>
@@ -45,7 +45,7 @@
 
       <el-col :span="12" class="card-box">
         <el-card>
-          <template #header><PieChart style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">命令统计</span></template>
+          <template #header><PieChart style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">명령 통계</span></template>
           <div class="el-table el-table--enable-row-hover el-table--medium">
             <div ref="commandstats" style="height: 420px" />
           </div>
@@ -54,7 +54,7 @@
 
       <el-col :span="12" class="card-box">
         <el-card>
-          <template #header><Odometer style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">内存信息</span></template>
+          <template #header><Odometer style="width: 1em; height: 1em; vertical-align: middle;" /> <span style="vertical-align: middle;">메모리 정보</span></template>
           <div class="el-table el-table--enable-row-hover el-table--medium">
             <div ref="usedmemory" style="height: 420px" />
           </div>
@@ -74,7 +74,7 @@ const usedmemory = ref(null);
 const { proxy } = getCurrentInstance();
 
 function getList() {
-  proxy.$modal.loading("正在加载缓存监控数据，请稍候！");
+  proxy.$modal.loading("캐시 정보를 불러오는 중입니다.");
   getCache().then(response => {
     proxy.$modal.closeLoading();
     cache.value = response.data;
@@ -87,7 +87,7 @@ function getList() {
       },
       series: [
         {
-          name: "命令",
+          name: "명령",
           type: "pie",
           roseType: "radius",
           radius: [15, 95],
@@ -105,7 +105,7 @@ function getList() {
       },
       series: [
         {
-          name: "峰值",
+          name: "최대값",
           type: "gauge",
           min: 0,
           max: 1000,
@@ -115,7 +115,7 @@ function getList() {
           data: [
             {
               value: parseFloat(cache.value.info.used_memory_human),
-              name: "内存消耗"
+              name: "메모리 사용량"
             }
           ]
         }

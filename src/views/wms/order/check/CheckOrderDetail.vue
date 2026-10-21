@@ -1,33 +1,33 @@
 <template>
-  <el-drawer :model-value="show" :title="'盘库单【' + orderNo + '】的商品明细'" @close="handleCancelClick" :size="size" :close-on-click-modal="false"
+  <el-drawer :model-value="show" :title="'실사 전표【' + orderNo + '】 상품 상세'" @close="handleCancelClick" :size="size" :close-on-click-modal="false"
              append-to-body>
     <div class="flex-space-between">
       <div></div>
-      <el-checkbox v-model="queryParams.haveProfitAndLoss" label="只查看有盈亏数的" @change="handleQuery"/>
+      <el-checkbox v-model="queryParams.haveProfitAndLoss" label="재고 차이가 있는 항목만 보기" @change="handleQuery"/>
     </div>
-    <el-table :data="list" border empty-text="暂无商品明细" v-loading="loading" ref="inventorySelectFormRef"
+    <el-table :data="list" border empty-text="등록된 상품 상세가 없습니다." v-loading="loading" ref="inventorySelectFormRef"
               cell-class-name="my-cell" class="mt20">
-      <el-table-column label="商品名称">
+      <el-table-column label="상품명">
         <template #default="{ row }">
           <div>{{ row?.item?.itemName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="规格名称">
+      <el-table-column label="규격명">
         <template #default="{ row }">
           <div>{{ row?.itemSku?.skuName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="账面库存" prop="quantity" align="right">
+      <el-table-column label="장부 재고" prop="quantity" align="right">
         <template #default="{ row }">
           <el-statistic :value="Number(row.quantity)" :precision="0"/>
         </template>
       </el-table-column>
-      <el-table-column label="盈亏数" align="right">
+      <el-table-column label="재고 차이" align="right">
         <template #default="{ row }">
           <el-statistic :value="Number(row.checkQuantity) - Number(row.quantity)" :precision="0"/>
         </template>
       </el-table-column>
-      <el-table-column label="实际库存" prop="checkQuantity" align="right">
+      <el-table-column label="실제 재고" prop="checkQuantity" align="right">
         <template #default="{ row }">
           <el-statistic :value="Number(row.checkQuantity)" :precision="0"/>
         </template>

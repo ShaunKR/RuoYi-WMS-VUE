@@ -5,58 +5,58 @@
         <el-col :span="6">
           <div class="top-item-box item-box-one" style="display: flex;">
             <div style="flex:2;height:100%;">
-              <div>入库</div>
+              <div>입고</div>
               <div style="text-align:center;margin-top:30px;"><span style="font-size:26px;font-weight:bold;">33</span>
               </div>
             </div>
             <div style="flex:3;display: flex;flex-direction:column;justify-content:space-evenly">
-              <div>待入库：15</div>
-              <div>待质检：15</div>
-              <div>待上架：2</div>
-              <div>待完成：1 </div>
+              <div>입고 대기：15</div>
+              <div>품질 검사 대기：15</div>
+              <div>적치 대기：2</div>
+              <div>완료 대기：1 </div>
             </div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="top-item-box item-box-two" style="display: flex;">
             <div style="flex:2;height:100%;">
-              <div>出库</div>
+              <div>출고</div>
               <div style="text-align:center;margin-top:30px;"><span style="font-size:26px;font-weight:bold;"
               >20</span></div>
             </div>
             <div style="flex:3;display: flex;flex-direction:column;justify-content:space-evenly">
-              <div>待配货：5</div>
-              <div>待波次：5</div>
-              <div>待拣货：5</div>
-              <div>待出库：5</div>
+              <div>배정 대기：5</div>
+              <div>웨이브 대기：5</div>
+              <div>피킹 대기：5</div>
+              <div>출고 대기：5</div>
             </div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="top-item-box item-box-three" style="display: flex;">
             <div style="flex:2;height:100%;">
-              <div>其他</div>
+              <div>기타</div>
               <div style="text-align:center;margin-top:30px;"><span style="font-size:26px;font-weight:bold;"
               >15</span></div>
             </div>
             <div style="flex:3;display: flex;flex-direction:column;justify-content:space-evenly">
-              <div>待截单：5</div>
-              <div>异常单：5</div>
-              <div>今日到货：5</div>
+              <div>마감 대기：5</div>
+              <div>이상 전표：5</div>
+              <div>오늘 도착：5</div>
             </div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="top-item-box item-box-four" style="display: flex;">
             <div style="flex:2;height:100%;">
-              <div>库存预警</div>
+              <div>재고 경고</div>
               <div style="text-align:center;margin-top:30px;"><span style="font-size:26px;font-weight:bold;">5</span>
               </div>
             </div>
             <div style="flex:3;display: flex;flex-direction:column;justify-content:space-evenly">
-              <div>松陵仓：1</div>
-              <div>盛泽仓：2</div>
-              <div>园区仓：2</div>
+              <div>쑹링 창고：1</div>
+              <div>성쩌 창고：2</div>
+              <div>산업단지 창고：2</div>
             </div>
           </div>
         </el-col>
@@ -66,7 +66,7 @@
       <el-row :gutter="12">
         <el-col :span="6">
           <el-card class="box-card" shadow="never">
-            <div class="card-title">仓库货物占比</div>
+            <div class="card-title">창고별 상품 비중</div>
             <div style="height: calc(100% - 30px);">
               <StationPie height="100%"></StationPie>
               <div></div>
@@ -76,11 +76,11 @@
         <el-col :span="18">
           <el-card class="box-card" shadow="never">
             <div style="display:flex;justify-content: space-between;align-items: center;">
-              <div class="card-title">生产入库趋势</div>
+              <div class="card-title">생산 입고 추이</div>
               <el-radio-group v-model="tabPosition" @change="dateChange">
                 <!-- <el-radio-button label="day">当日</el-radio-button> -->
-                <el-radio-button label="month">本月</el-radio-button>
-                <el-radio-button label="year">今年</el-radio-button>
+                <el-radio-button label="month">이번 달</el-radio-button>
+                <el-radio-button label="year">올해</el-radio-button>
               </el-radio-group>
             </div>
             <div style="height: calc(100% - 30px);">
@@ -94,25 +94,25 @@
       <el-row :gutter="12">
         <el-col :span="6">
           <el-card class="box-card" shadow="never">
-            <div class="card-title">近7日销售出库</div>
+            <div class="card-title">최근7일간 판매 출고</div>
             <div style="height: calc(100% - 30px);">
-              <StationLine height="100%" itemColor="#ee4368" yName="件" :chartData="lineDataOne"/>
+              <StationLine height="100%" itemColor="#ee4368" yName="건" :chartData="lineDataOne"/>
             </div>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="box-card" shadow="never">
-            <div class="card-title">近7日领料出库</div>
+            <div class="card-title">최근7일간 자재 출고</div>
             <div style="height: calc(100% - 30px);">
-              <StationLine height="100%" :chartData="lineDataTwo" yName="件" itemColor="#5470c6"/>
+              <StationLine height="100%" :chartData="lineDataTwo" yName="건" itemColor="#5470c6"/>
             </div>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="box-card" shadow="never">
-            <div class="card-title">近7日移库</div>
+            <div class="card-title">최근7일간 재고 이동</div>
             <div style="height: calc(100% - 30px);">
-              <StationLine height="100%"  :chartData="lineDataThree" yName="件"
+              <StationLine height="100%"  :chartData="lineDataThree" yName="건"
                            itemColor="#c58bea"
               />
             </div>
@@ -120,9 +120,9 @@
         </el-col>
         <el-col :span="6">
           <el-card class="box-card" shadow="never">
-            <div class="card-title">近7日退货入库</div>
+            <div class="card-title">최근7일간 반품 입고</div>
             <div style="height: calc(100% - 30px);">
-              <StationLine height="100%" yName="件" :chartData="lineDataFour"
+              <StationLine height="100%" yName="건" :chartData="lineDataFour"
                            itemColor="#c7a428"
               />
             </div>
@@ -143,7 +143,7 @@ const tabPosition = ref('month')
 const barChartData = ref({
   yData: [79, 68, 56, 72, 51, 63, 67, 71, 58, 81, 64, 77, 56, 69]
 })
-const barXName = ref('日')
+const barXName = ref('일')
 const lineDataOne = ref({
   yData: [79, 65, 21, 67, 21, 89, 56],
 })
@@ -176,13 +176,13 @@ function dateChange(value) {
       barXData.push(moment().subtract(i, 'months').format('YYYY-MM'))
       barYData.push(Math.floor(Math.random()*(180-120+1))+120)
     }
-    barXName.value = '月'
+    barXName.value = '월'
   } else {
     for(let i = 0; i < day; i++) {
       barXData.push(moment().subtract(i, 'days').format('MM-DD'))
       barYData.push(Math.floor(Math.random()*(30-15+1))+15)
     }
-    barXName.value = '日'
+    barXName.value = '일'
   }
   barChartData.value = {
     xData: barXData.reverse(),

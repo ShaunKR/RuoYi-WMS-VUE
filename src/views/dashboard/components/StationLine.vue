@@ -35,15 +35,15 @@ const props = defineProps({
   },
   yName: {
     type: String,
-    default: '次'
+    default: '회'
   },
   xName: {
     type: String,
-    default: '日'
+    default: '일'
   },
   seriesName: {
     type: String,
-    default: '充电次数'
+    default: '충전 횟수'
   },
   itemColor: {
     type: String,

@@ -3,7 +3,7 @@
     <el-card>
 
       <el-row :gutter="10" class="mb8" type="flex" justify="space-between">
-        <el-col :span="6"><span style="font-size: large">仓库列表</span></el-col>
+        <el-col :span="6"><span style="font-size: large">창고 목록</span></el-col>
         <el-col :span="1.5">
           <el-button
             type="primary"
@@ -11,18 +11,18 @@
             icon="Plus"
             @click="handleAdd"
             v-hasPermi="['wms:itemBrand:add']"
-          >新增</el-button>
+          >추가</el-button>
         </el-col>
       </el-row>
 
-      <el-table v-loading="loading" :data="warehouseList" border class="mt20" empty-text="暂无品牌">
-        <el-table-column label="仓库名称" prop="warehouseName" />
-        <el-table-column label="仓库编号" prop="warehouseCode" />
-        <el-table-column label="创建时间" prop="createTime" width="180"/>
-        <el-table-column label="操作" align="right" class-name="small-padding fixed-width" width="180">
+      <el-table v-loading="loading" :data="warehouseList" border class="mt20" empty-text="등록된 브랜드가 없습니다.">
+        <el-table-column label="창고명" prop="warehouseName" />
+        <el-table-column label="창고 코드" prop="warehouseCode" />
+        <el-table-column label="등록 일시" prop="createTime" width="180"/>
+        <el-table-column label="작업" align="right" class-name="small-padding fixed-width" width="180">
           <template #default="scope">
-            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['wms:itemBrand:edit']">修改</el-button>
-            <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['wms:itemBrand:remove']">删除</el-button>
+            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['wms:itemBrand:edit']">수정</el-button>
+            <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['wms:itemBrand:remove']">삭제</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -31,20 +31,20 @@
     <!-- 添加或修改仓库对话框 -->
     <el-dialog :title="dialog.title" v-model="dialog.visible" width="500px" append-to-body :close-on-click-modal="false">
       <el-form ref="warehouseFormRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="名称" prop="warehouseName">
-          <el-input v-model="form.warehouseName" placeholder="请输入名称" />
+        <el-form-item label="이름" prop="warehouseName">
+          <el-input v-model="form.warehouseName" placeholder="이름을 입력해 주세요." />
         </el-form-item>
-        <el-form-item label="编号" prop="warehouseCode">
-          <el-input v-model="form.warehouseCode" placeholder="请输入编号" />
+        <el-form-item label="코드" prop="warehouseCode">
+          <el-input v-model="form.warehouseCode" placeholder="코드를 입력해 주세요." />
         </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入备注" />
+        <el-form-item label="비고" prop="remark">
+          <el-input v-model="form.remark" placeholder="비고를 입력해 주세요." />
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button :loading="buttonLoading" type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+          <el-button :loading="buttonLoading" type="primary" @click="submitForm">확인</el-button>
+          <el-button @click="cancel">취소</el-button>
         </div>
       </template>
     </el-dialog>
@@ -100,10 +100,10 @@ const data = reactive({
   },
   rules: {
     id: [
-      { required: true, message: "不能为空", trigger: "blur" }
+      { required: true, message: "항목은 필수입니다.", trigger: "blur" }
     ],
     warehouseName: [
-      { required: true, message: "名称不能为空", trigger: "blur" }
+      { required: true, message: "이름을 입력해 주세요.", trigger: "blur" }
     ]
   }
 });
@@ -114,7 +114,7 @@ const { queryParams, form, rules } = toRefs(data);
 const selectedWarehouseId = ref()
 
 
-/** 查询仓库列表 */
+/** 조회창고 목록 */
 const getList = async () => {
   loading.value = true;
   const res = await listWarehouseNoPage(queryParams.value).finally(()=>{
@@ -124,25 +124,25 @@ const getList = async () => {
   total.value = res.total;
 }
 
-/** 取消按钮 */
+/** 취소버튼 */
 const cancel = () => {
   reset();
   dialog.visible = false;
 }
 
-/** 表单重置 */
+/** 表单초기화 */
 const reset = () => {
   form.value = {...initFormData};
   warehouseFormRef.value.resetFields();
 }
 
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 const handleQuery = () => {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 const resetQuery = () => {
   queryFormRef.value.resetFields();
   handleQuery();
@@ -150,20 +150,20 @@ const resetQuery = () => {
 
 // /** 多选框选中数据
 
-/** 新增按钮操作 */
+/** 추가버튼작업 */
 const handleAdd = async () => {
 
       dialog.visible = true;
-      dialog.title = "添加仓库";
+      dialog.title = "창고 추가";
       nextTick(() => {
         reset();
       });
 }
 
-/** 修改按钮操作 */
+/** 수정버튼작업 */
 const handleUpdate = (data) => {
   dialog.visible = true;
-  dialog.title = "修改仓库";
+  dialog.title = "창고 수정";
   nextTick(async () => {
     reset();
     const _id = data.id
@@ -172,7 +172,7 @@ const handleUpdate = (data) => {
   });
 }
 
-/** 提交按钮 */
+/** 저장버튼 */
 const submitForm = () => {
   warehouseFormRef.value.validate(async (valid) => {
     if (valid) {
@@ -182,7 +182,7 @@ const submitForm = () => {
       } else {
         await addWarehouse(form.value).finally(() =>  buttonLoading.value = false);
       }
-      proxy?.$modal.msgSuccess(form.value.id ? '修改成功' : '新增成功');
+      proxy?.$modal.msgSuccess(form.value.id ? '수정되었습니다.' : '등록되었습니다.');
       dialog.visible = false;
       await getList();
       wmsStore.getWarehouseList()
@@ -190,17 +190,17 @@ const submitForm = () => {
   });
 }
 
-/** 删除按钮操作 */
+/** 삭제버튼작업 */
 const handleDelete = async (data) => {
   const _ids = data.id;
-  await proxy?.$modal.confirm('确认删除仓库【' + data.warehouseName + '】吗？').finally(() => loading.value = false);
+  await proxy?.$modal.confirm('삭제 확인:창고【' + data.warehouseName + '】을(를) 삭제하시겠습니까?').finally(() => loading.value = false);
   await delWarehouse(_ids);
-  proxy?.$modal.msgSuccess("删除成功");
+  proxy?.$modal.msgSuccess("삭제되었습니다.");
   await getList();
   wmsStore.getWarehouseList()
 }
 
-/** 导出按钮操作 */
+/** 내보내기버튼작업 */
 const handleExport = () => {
   proxy?.download('wms/warehouse/export', {
     ...queryParams.value

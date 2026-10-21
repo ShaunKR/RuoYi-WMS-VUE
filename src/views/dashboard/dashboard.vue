@@ -1,36 +1,36 @@
 <template>
   <div class="board-container">
-    <div v-if="showWhich" class="back-btn" @click="backHome"><img src="@/assets/images/home.png">返回</div>
+    <div v-if="showWhich" class="back-btn" @click="backHome"><img src="@/assets/images/home.png">돌아가기</div>
     <img v-else src="@/assets/images/fullscreen.png" alt="" class="fullscreen-img" @click="toDataBoard" >
     <div class="time-stamp">{{ nowTime }}</div>
-    <div class="board-title"><span>数据可视化平台</span></div>
+    <div class="board-title"><span>창고 운영 현황판</span></div>
     <div class="board-content flex-between">
       <div class="content-left flex-column-between">
         <div class="content-overview">
-          <div class="box-title">库存总览</div>
+          <div class="box-title">재고 현황</div>
           <div class="box-content flex-between">
             <div class="overview-object flex-column-center">
               <div class="object-count">5</div>
-              <div class="object-name">仓库总数</div>
+              <div class="object-name">창고 수</div>
             </div>
             <div class="overview-meter flex-column-center">
               <div class="object-count">981</div>
-              <div class="object-name">库位总数</div>
+              <div class="object-name">보관 위치 수</div>
             </div>
             <div class="overview-alarm flex-column-center">
               <div class="object-count">4</div>
-              <div class="object-name">异常库位</div>
+              <div class="object-name">이상 보관 위치</div>
             </div>
           </div>
         </div>
         <div class="content-status">
-          <div class="box-title">监控设备状态</div>
+          <div class="box-title">모니터링 장비 상태</div>
           <div class="box-content">
             <CirclePieChart height="100%" :pieData="pieData"/>
           </div>
         </div>
         <div class="content-alarm">
-          <div class="box-title">报警信息</div>
+          <div class="box-title">알림 정보</div>
           <div class="box-content">
             <alarmInfo/>
           </div>
@@ -39,14 +39,14 @@
       <div class="content-middle flex-column-between">
         <div class="content-map" id="boardMap"></div>
         <div class="content-chart">
-          <div class="box-title">今日仓库耗能</div>
+          <div class="box-title">오늘 창고 에너지 사용량</div>
           <div class="box-content">
             <el-tabs
               v-model="activeName"
               @tab-click="handleClick"
               class="trend-tabs"
             >
-              <el-tab-pane label="综合能耗" name="total">
+              <el-tab-pane label="총 에너지 사용량" name="total">
                 <TrendLineChart
                   v-if="activeName === 'total'"
                   :height="'100%'"
@@ -55,7 +55,7 @@
                   :yData="energyData"
                 />
               </el-tab-pane>
-              <el-tab-pane label="电" name="electricity">
+              <el-tab-pane label="전기" name="electricity">
                 <TrendLineChart
                   v-if="activeName === 'electricity'"
                   :height="'100%'"
@@ -64,7 +64,7 @@
                   :yData="electricityData"
                 />
               </el-tab-pane>
-              <el-tab-pane label="水" name="water">
+              <el-tab-pane label="수도" name="water">
                 <TrendLineChart
                   v-if="activeName === 'water'"
                   :height="'100%'"
@@ -79,73 +79,73 @@
       </div>
       <div class="content-right flex-column-between">
         <div class="content-statistics">
-          <div class="box-title">入库统计</div>
+          <div class="box-title">입고 통계</div>
           <div class="box-content flex-between">
             <div class="statistics-item flex-column-center">
 <!--              <lightning theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">58</div>
-              <div style="text-align: center">待入库</div>
+              <div style="text-align: center">입고 대기</div>
             </div>
             <div class="statistics-item flex-column-center">
 <!--              <dashboard theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">10</div>
-              <div style="text-align: center">待质检</div>
+              <div style="text-align: center">품질 검사 대기</div>
             </div>
             <div class="statistics-item flex-column-center">
 <!--              <cycle theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">5</div>
-              <div style="text-align: center">待上架</div>
+              <div style="text-align: center">적치 대기</div>
             </div>
           </div>
         </div>
         <div class="content-statistics">
-          <div class="box-title">出库统计</div>
+          <div class="box-title">출고 통계</div>
           <div class="box-content flex-between">
             <div class="statistics-item flex-column-center">
               <!--              <lightning theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">15</div>
-              <div style="text-align: center">待配货</div>
+              <div style="text-align: center">배정 대기</div>
             </div>
             <div class="statistics-item flex-column-center">
               <!--              <dashboard theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">10</div>
-              <div style="text-align: center">待拣货</div>
+              <div style="text-align: center">피킹 대기</div>
             </div>
             <div class="statistics-item flex-column-center">
               <!--              <cycle theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">5</div>
-              <div style="text-align: center">待出库</div>
+              <div style="text-align: center">출고 대기</div>
             </div>
           </div>
         </div>
         <div class="content-statistics">
-          <div class="box-title">其他</div>
+          <div class="box-title">기타</div>
           <div class="box-content flex-between">
             <div class="statistics-item flex-column-center">
               <!--              <lightning theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">15</div>
-              <div style="text-align: center">待截单</div>
+              <div style="text-align: center">마감 대기</div>
             </div>
             <div class="statistics-item flex-column-center">
               <!--              <dashboard theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">10</div>
-              <div style="text-align: center">异常单</div>
+              <div style="text-align: center">이상 전표</div>
             </div>
             <div class="statistics-item flex-column-center">
               <!--              <cycle theme="outline" size="25" fill="#00d1ff"/>-->
               <div class="item-count">5</div>
-              <div style="text-align: center">今日到货</div>
+              <div style="text-align: center">오늘 도착</div>
             </div>
           </div>
         </div>
 
         <div class="content-carbon">
-          <div class="box-title">今日出入库流水</div>
+          <div class="box-title">오늘 입출고 내역</div>
           <div class="box-content">
             <barChart
               :height="'100%'"
               :barColor="['#1c508e', '#1be5e7']"
-              :yName="'件'"
+              :yName="'건'"
               :xData="xData"
               :yData="carbonData"
             />
@@ -172,7 +172,7 @@ const showWhich = computed(()=>{
 })
 const activeName = ref('total')
 const nowTime = ref()
-const timer = ref()  //定时任务
+const timer = ref()  //예약 작업
 const pieData = ref([])
 const deviceTotal = ref(0)
 const alarmTotal = ref(0)
@@ -249,16 +249,16 @@ function getEquipmentData() {
     }
   ]
   pieData.value = [
-    { value: res[0].count, name: '正常', itemStyle: { color: '#6be6c3' } },
-    { value: res[1].count, name: '报警', itemStyle: { color: '#e0c464' } },
-    { value: res[2].count, name: '离线', itemStyle: { color: '#297ef8' } }
+    { value: res[0].count, name: '정상', itemStyle: { color: '#6be6c3' } },
+    { value: res[1].count, name: '경고', itemStyle: { color: '#e0c464' } },
+    { value: res[2].count, name: '연결 끊김', itemStyle: { color: '#297ef8' } }
   ]
   res.forEach(item => {
     deviceTotal.value = item.count + deviceTotal.value
   })
 }
 
-/** 查询历史报警列表 */
+/** 조회历史경고列表 */
 function getAlarmList() {
   alarmTotal.value = 4
 }
@@ -269,13 +269,13 @@ function getAreaList() {
     {
       'id': 1,
       'parentId': 0,
-      'label': '科研楼',
+      'label': '연구동',
       'weight': 0,
       'children': [
         {
           'id': '1646408966204309506',
           'parentId': 1,
-          'label': '一层',
+          'label': '1층',
           'weight': 31,
           'children': [
             {
@@ -301,7 +301,7 @@ function getAreaList() {
         {
           'id': '1648325981443239938',
           'parentId': 1,
-          'label': '二层',
+          'label': '2층',
           'weight': 32,
           'children': [
             {
@@ -335,37 +335,37 @@ function getAreaList() {
     {
       'id': 3454657657688,
       'parentId': 0,
-      'label': '能源分项',
+      'label': '에너지원별 현황',
       'weight': 0,
       'children': [
         {
           'id': '1698583616605478914',
           'parentId': 3454657657688,
-          'label': '电',
+          'label': '전기',
           'weight': 0,
           'children': [
             {
               'id': '1698584115568271361',
               'parentId': '1698583616605478914',
-              'label': '插座用电',
+              'label': '콘센트 전력',
               'weight': 0
             },
             {
               'id': '1698584207037652993',
               'parentId': '1698583616605478914',
-              'label': '空调用电',
+              'label': '냉난방 전력',
               'weight': 1
             },
             {
               'id': '1698585341307478017',
               'parentId': '1698583616605478914',
-              'label': '照明用电',
+              'label': '조명 전력',
               'weight': 2
             },
             {
               'id': '1698585419581579266',
               'parentId': '1698583616605478914',
-              'label': '特殊用电',
+              'label': '기타 전력',
               'weight': 3
             }
           ]
@@ -373,7 +373,7 @@ function getAreaList() {
         {
           'id': '1698583808511664130',
           'parentId': 3454657657688,
-          'label': '水',
+          'label': '수도',
           'weight': 1
         }
       ]
@@ -644,8 +644,8 @@ function initMap() {
   // 以 地名 定位
   // map.value.centerAndZoom('苏州市', 12);
 
-  map.value.enableScrollWheelZoom() //启用滚轮放大缩小，默认禁用
-  map.value.enableContinuousZoom() //启用地图惯性拖拽，默认禁用
+  map.value.enableScrollWheelZoom() //사용滚轮放大缩小，기본사용 안 함
+  map.value.enableContinuousZoom() //사용地图惯性拖拽，기본사용 안 함
 
   // 标注
   let marker = new BMapGL.Marker(point, { icon: myIcon })
@@ -654,7 +654,7 @@ function initMap() {
   let opts = {
     width: 250,
     height: 100,
-    title: '武珞科技园'
+    title: '우뤄 과학단지'
   }
   // let infoWindow = new BMapGL.InfoWindow("云脉软件", opts);
   // marker.addEventListener("mouseover", function () {
@@ -671,7 +671,7 @@ function initMap() {
   let opts2 = {
     width: 250,
     height: 100,
-    title: '优胜美地生产基地'
+    title: '요세미티 생산기지'
   }
   // let infoWindow2 = new BMapGL.InfoWindow("优胜美地", opts2);
   // marker2.addEventListener("mouseover", function () {
@@ -940,7 +940,7 @@ onBeforeUnmount(() => {
   height: calc(100% - 55px);
 }
 
-/* 地图信息窗口样式修改 */
+/* 地图정보窗口样式수정 */
 #boardMap .BMap_bubble_pop {
   background-color: rgba(28, 37, 80, 0.8) !important;
   border: 1px solid #186dbf !important;

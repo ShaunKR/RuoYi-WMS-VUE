@@ -43,7 +43,7 @@ const props = defineProps({
   },
   xName: {
     type: String,
-    default: '时'
+    default: '시'
   },
   xData: {
     type: Array,
@@ -136,14 +136,14 @@ function setOptions({ yesterdayData, todayData } = {}) {
       }
     },
     legend: {
-      data: ['昨日', '当日'],
+      data: ['어제', '오늘'],
       textStyle: {
         color: '#fff'
       }
     },
     series: [
       {
-        name: '昨日',
+        name: '어제',
         itemStyle: {
           color: '#c59af4'
         },
@@ -167,7 +167,7 @@ function setOptions({ yesterdayData, todayData } = {}) {
         }
       },
       {
-        name: '当日',
+        name: '오늘',
         smooth: true,
         type: 'line',
         symbol: 'none',

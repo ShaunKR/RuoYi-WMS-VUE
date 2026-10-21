@@ -1,28 +1,28 @@
 <template>
    <div class="app-container">
       <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-         <el-form-item label="字典名称" prop="dictName">
+         <el-form-item label="코드 그룹명" prop="dictName">
             <el-input
                v-model="queryParams.dictName"
-               placeholder="请输入字典名称"
+               placeholder="입력해 주세요:코드 그룹명"
                clearable
                style="width: 240px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="字典类型" prop="dictType">
+         <el-form-item label="코드 그룹" prop="dictType">
             <el-input
                v-model="queryParams.dictType"
-               placeholder="请输入字典类型"
+               placeholder="입력해 주세요:코드 그룹"
                clearable
                style="width: 240px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="状态" prop="status">
+         <el-form-item label="상태" prop="status">
             <el-select
                v-model="queryParams.status"
-               placeholder="字典状态"
+               placeholder="코드 상태"
                clearable
                style="width: 240px"
             >
@@ -34,20 +34,20 @@
                />
             </el-select>
          </el-form-item>
-         <el-form-item label="创建时间" style="width: 308px">
+         <el-form-item label="등록 일시" style="width: 308px">
             <el-date-picker
                v-model="dateRange"
                value-format="YYYY-MM-DD HH:mm:ss"
                type="daterange"
                range-separator="-"
-               start-placeholder="开始日期"
-               end-placeholder="结束日期"
+               start-placeholder="시작일"
+               end-placeholder="종료일"
                :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
             ></el-date-picker>
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">검색</el-button>
+            <el-button icon="Refresh" @click="resetQuery">초기화</el-button>
          </el-form-item>
       </el-form>
 
@@ -59,7 +59,7 @@
                icon="Plus"
                @click="handleAdd"
                v-hasPermi="['system:dict:add']"
-            >新增</el-button>
+            >추가</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -69,7 +69,7 @@
                :disabled="single"
                @click="handleUpdate"
                v-hasPermi="['system:dict:edit']"
-            >修改</el-button>
+            >수정</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -79,7 +79,7 @@
                :disabled="multiple"
                @click="handleDelete"
                v-hasPermi="['system:dict:remove']"
-            >删除</el-button>
+            >삭제</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -88,7 +88,7 @@
                icon="Download"
                @click="handleExport"
                v-hasPermi="['system:dict:export']"
-            >导出</el-button>
+            >내보내기</el-button>
          </el-col>
          <el-col :span="1.5">
             <el-button
@@ -97,37 +97,37 @@
                icon="Refresh"
                @click="handleRefreshCache"
                v-hasPermi="['system:dict:remove']"
-            >刷新缓存</el-button>
+            >캐시 갱신</el-button>
          </el-col>
          <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
 
       <el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column label="字典编号" align="center" prop="dictId" />
-         <el-table-column label="字典名称" align="center" prop="dictName" :show-overflow-tooltip="true"/>
-         <el-table-column label="字典类型" align="center" :show-overflow-tooltip="true">
+         <el-table-column label="코드 번호" align="center" prop="dictId" />
+         <el-table-column label="코드 그룹명" align="center" prop="dictName" :show-overflow-tooltip="true"/>
+         <el-table-column label="코드 그룹" align="center" :show-overflow-tooltip="true">
             <template #default="scope">
                <router-link :to="'/system/dict-data/index/' + scope.row.dictId" class="link-type">
                   <span>{{ scope.row.dictType }}</span>
                </router-link>
             </template>
          </el-table-column>
-         <el-table-column label="状态" align="center" prop="status">
+         <el-table-column label="상태" align="center" prop="status">
             <template #default="scope">
                <dict-tag :options="sys_normal_disable" :value="scope.row.status" />
             </template>
          </el-table-column>
-         <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true" />
-         <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+         <el-table-column label="비고" align="center" prop="remark" :show-overflow-tooltip="true" />
+         <el-table-column label="등록 일시" align="center" prop="createTime" width="180">
             <template #default="scope">
                <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
          </el-table-column>
-         <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+         <el-table-column label="작업" align="center" width="160" class-name="small-padding fixed-width">
             <template #default="scope">
-               <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:dict:edit']">修改</el-button>
-               <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:dict:remove']">删除</el-button>
+               <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:dict:edit']">수정</el-button>
+               <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:dict:remove']">삭제</el-button>
             </template>
          </el-table-column>
       </el-table>
@@ -143,13 +143,13 @@
       <!-- 添加或修改参数配置对话框 -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
          <el-form ref="dictRef" :model="form" :rules="rules" label-width="80px">
-            <el-form-item label="字典名称" prop="dictName">
-               <el-input v-model="form.dictName" placeholder="请输入字典名称" />
+            <el-form-item label="코드 그룹명" prop="dictName">
+               <el-input v-model="form.dictName" placeholder="입력해 주세요:코드 그룹명" />
             </el-form-item>
-            <el-form-item label="字典类型" prop="dictType">
-               <el-input v-model="form.dictType" placeholder="请输入字典类型" />
+            <el-form-item label="코드 그룹" prop="dictType">
+               <el-input v-model="form.dictType" placeholder="입력해 주세요:코드 그룹" />
             </el-form-item>
-            <el-form-item label="状态" prop="status">
+            <el-form-item label="상태" prop="status">
                <el-radio-group v-model="form.status">
                   <el-radio
                      v-for="dict in sys_normal_disable"
@@ -158,14 +158,14 @@
                   >{{ dict.label }}</el-radio>
                </el-radio-group>
             </el-form-item>
-            <el-form-item label="备注" prop="remark">
-               <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
+            <el-form-item label="비고" prop="remark">
+               <el-input v-model="form.remark" type="textarea" placeholder="내용을 입력해 주세요."></el-input>
             </el-form-item>
          </el-form>
          <template #footer>
             <div class="dialog-footer">
-               <el-button type="primary" @click="submitForm">确 定</el-button>
-               <el-button @click="cancel">取 消</el-button>
+               <el-button type="primary" @click="submitForm">확인</el-button>
+               <el-button @click="cancel">취소</el-button>
             </div>
          </template>
       </el-dialog>
@@ -200,14 +200,14 @@ const data = reactive({
     status: undefined
   },
   rules: {
-    dictName: [{ required: true, message: "字典名称不能为空", trigger: "blur" }],
-    dictType: [{ required: true, message: "字典类型不能为空", trigger: "blur" }]
+    dictName: [{ required: true, message: "코드 그룹명항목은 필수입니다.", trigger: "blur" }],
+    dictType: [{ required: true, message: "코드 그룹항목은 필수입니다.", trigger: "blur" }]
   },
 });
 
 const { queryParams, form, rules } = toRefs(data);
 
-/** 查询字典类型列表 */
+/** 조회코드 그룹列表 */
 function getList() {
   loading.value = true;
   listType(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
@@ -216,12 +216,12 @@ function getList() {
     loading.value = false;
   });
 }
-/** 取消按钮 */
+/** 취소버튼 */
 function cancel() {
   open.value = false;
   reset();
 }
-/** 表单重置 */
+/** 表单초기화 */
 function reset() {
   form.value = {
     dictId: undefined,
@@ -232,22 +232,22 @@ function reset() {
   };
   proxy.resetForm("dictRef");
 }
-/** 搜索按钮操作 */
+/** 검색버튼작업 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
-/** 重置按钮操作 */
+/** 초기화버튼작업 */
 function resetQuery() {
   dateRange.value = [];
   proxy.resetForm("queryRef");
   handleQuery();
 }
-/** 新增按钮操作 */
+/** 추가버튼작업 */
 function handleAdd() {
   reset();
   open.value = true;
-  title.value = "添加字典类型";
+  title.value = "추가코드 그룹";
 }
 /** 多选框选中数据 */
 function handleSelectionChange(selection) {
@@ -255,29 +255,29 @@ function handleSelectionChange(selection) {
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
-/** 修改按钮操作 */
+/** 수정버튼작업 */
 function handleUpdate(row) {
   reset();
   const dictId = row.dictId || ids.value;
   getType(dictId).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改字典类型";
+    title.value = "수정코드 그룹";
   });
 }
-/** 提交按钮 */
+/** 저장버튼 */
 function submitForm() {
   proxy.$refs["dictRef"].validate(valid => {
     if (valid) {
       if (form.value.dictId != undefined) {
         updateType(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          proxy.$modal.msgSuccess("수정되었습니다.");
           open.value = false;
           getList();
         });
       } else {
         addType(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          proxy.$modal.msgSuccess("등록되었습니다.");
           open.value = false;
           getList();
         });
@@ -285,26 +285,26 @@ function submitForm() {
     }
   });
 }
-/** 删除按钮操作 */
+/** 삭제버튼작업 */
 function handleDelete(row) {
   const dictIds = row.dictId || ids.value;
-  proxy.$modal.confirm('是否确认删除字典编号为"' + dictIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('삭제하시겠습니까:코드 번호: "' + dictIds + '" 항목을 처리하시겠습니까?').then(function() {
     return delType(dictIds);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    proxy.$modal.msgSuccess("삭제되었습니다.");
   }).catch(() => {});
 }
-/** 导出按钮操作 */
+/** 내보내기버튼작업 */
 function handleExport() {
   proxy.download("system/dict/type/export", {
     ...queryParams.value
   }, `dict_${new Date().getTime()}.xlsx`);
 }
-/** 刷新缓存按钮操作 */
+/** 캐시 갱신버튼작업 */
 function handleRefreshCache() {
   refreshCache().then(() => {
-    proxy.$modal.msgSuccess("刷新成功");
+    proxy.$modal.msgSuccess("새로고침했습니다.");
     useDictStore().cleanDict();
   });
 }

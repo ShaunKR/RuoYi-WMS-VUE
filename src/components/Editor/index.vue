@@ -32,7 +32,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { getToken } from "@/utils/auth";
 
 const props = defineProps({
-  /* 编辑器的内容 */
+  /* 编辑器的내용 */
   modelValue: {
     type: String,
   },
@@ -51,12 +51,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /* 上传文件大小限制(MB) */
+  /* 파일 업로드大小限制(MB) */
   fileSize: {
     type: Number,
     default: 5,
   },
-  /* 类型（base64格式、url格式） */
+  /* 유형（base64格式、url格式） */
   type: {
     type: String,
     default: "url",
@@ -77,16 +77,16 @@ const options = ref({
     // 工具栏配置
     toolbar: {
       container: [
-        ["bold", "italic", "underline", "strike"],       // 加粗 斜体 下划线 删除线
+        ["bold", "italic", "underline", "strike"],       // 加粗 斜体 下划线 삭제线
         ["blockquote", "code-block"],                    // 引用  代码块
         [{ list: "ordered" }, { list: "bullet"} ],       // 有序、无序列表
         [{ indent: "-1" }, { indent: "+1" }],            // 缩进
         [{ size: ["small", false, "large", "huge"] }],   // 字体大小
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],         // 标题
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],         // 제목
         [{ color: [] }, { background: [] }],             // 字体颜色、字体背景颜色
         [{ align: [] }],                                 // 对齐方式
-        ["clean"],                                       // 清除文本格式
-        ["link", "image", "video"]                       // 链接、图片、视频
+        ["clean"],                                       // 서식 지우기
+        ["link", "image", "video"]                       // 链接、이미지、视频
       ],
       handlers: {
         image: function (value) {
@@ -100,7 +100,7 @@ const options = ref({
       },
     }
   },
-  placeholder: "请输入内容",
+  placeholder: "내용을 입력해 주세요.",
   readOnly: props.readOnly,
 });
 
@@ -147,24 +147,24 @@ function handleBeforeUpload(file) {
   const isJPG = type.includes(file.type);
   //检验文件格式
   if (!isJPG) {
-    proxy.$modal.msgError(`图片格式错误!`);
+    proxy.$modal.msgError(`지원하지 않는 이미지 형식입니다.!`);
     return false;
   }
   // 校检文件大小
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize;
     if (!isLt) {
-      proxy.$modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`);
+      proxy.$modal.msgError(`파일 크기는 다음 용량 이하여야 합니다: ${props.fileSize} MB!`);
       return false;
     }
   }
-  proxy.$modal.loading("正在上传文件，请稍候...");
+  proxy.$modal.loading("파일 업로드 중입니다....");
   return true;
 }
 
 // 图片失败拦截
 function handleUploadError(err) {
-  proxy.$modal.msgError("上传文件失败");
+  proxy.$modal.msgError("파일 업로드에 실패했습니다.");
 }
 
 </script>
@@ -181,16 +181,16 @@ function handleUploadError(err) {
   display: none;
 }
 .ql-snow .ql-tooltip[data-mode="link"]::before {
-  content: "请输入链接地址:";
+  content: "링크 주소를 입력해 주세요.:";
 }
 .ql-snow .ql-tooltip.ql-editing a.ql-action::after {
   border-right: 0px;
-  content: "保存";
+  content: "저장";
   padding-right: 0px;
 }
 
 .ql-snow .ql-tooltip[data-mode="video"]::before {
-  content: "请输入视频地址:";
+  content: "동영상 주소를 입력해 주세요.:";
 }
 
 .ql-snow .ql-picker.ql-size .ql-picker-label::before,
@@ -212,43 +212,43 @@ function handleUploadError(err) {
 
 .ql-snow .ql-picker.ql-header .ql-picker-label::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: "文本";
+  content: "텍스트";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-  content: "标题1";
+  content: "제목1";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-  content: "标题2";
+  content: "제목2";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-  content: "标题3";
+  content: "제목3";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-  content: "标题4";
+  content: "제목4";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-  content: "标题5";
+  content: "제목5";
 }
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-  content: "标题6";
+  content: "제목6";
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item::before {
-  content: "标准字体";
+  content: "기본 글꼴";
 }
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
-  content: "衬线字体";
+  content: "명조체";
 }
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
-  content: "等宽字体";
+  content: "고정폭 글꼴";
 }
 </style>
